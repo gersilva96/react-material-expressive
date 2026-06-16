@@ -1,0 +1,90 @@
+# react-material-expressive
+
+> React component system implementing Material 3 Expressive. Framework-
+> agnostic (native <img>/<a> + media injection), precompiled CSS (no
+> Tailwind setup needed), runtime theming via official --md-sys-* tokens,
+> React >= 19 (ESM + CJS + types, "use client" embedded). Single root
+> export (react-material-expressive) plus the precompiled ./styles.css
+> and the raw ./theme.css Tailwind partial (only to extend with your own
+> Tailwind v4).
+
+## Start here
+
+- [README](README.md): install, quickstart,
+  theming, icons, media/link injection, i18n (per-component `labels` prop,
+  English defaults only; `locale` for Intl formatting), subpath map.
+- [CHANGELOG](CHANGELOG.md): per-release history with a migration note on
+  every breaking change (pre-1.0: breaking bumps the minor version).
+
+## Component docs (API, props, variants, examples, gotchas)
+
+### Actions
+- [Button](docs/components/Button.md)
+- [ButtonGroup](docs/components/ButtonGroup.md)
+- [ButtonGroupConnected](docs/components/ButtonGroupConnected.md)
+- [IconButton](docs/components/IconButton.md)
+- [FAB and ExtendedFAB](docs/components/FAB.md)
+- [FABMenu](docs/components/FABMenu.md)
+- [SplitButton](docs/components/SplitButton.md)
+
+### Communication
+- [Badge, DotBadge, OnIconBadge](docs/components/Badge.md)
+- [Progress and Circle](docs/components/Progress.md)
+- [LoadingIndicator](docs/components/LoadingIndicator.md)
+- [Snackbar and SnackbarWrapper](docs/components/Snackbar.md)
+- [Tooltip](docs/components/Tooltip.md)
+- [Loading](docs/components/Loading.md)
+
+### Containment
+- [Card (+Header/Body/Footer)](docs/components/Card.md)
+- [Dialog (+Header/Body/Footer)](docs/components/Dialog.md)
+- [BottomSheet and SideSheet](docs/components/Sheets.md)
+- [Divider](docs/components/Divider.md)
+- [List (+List.Item)](docs/components/List.md)
+- [Table (+Head/Body/Row/Cell/HeaderCell/TextContainer)](docs/components/Table.md)
+
+### Selection and input
+- [Checkbox](docs/components/Checkbox.md)
+- [Radio](docs/components/Radio.md)
+- [Switch](docs/components/Switch.md)
+- [Chips](docs/components/Chips.md)
+- [Slider and SliderDual](docs/components/Slider.md)
+- [TextField (InputOutlined/InputFilled/TextFieldOutlined/TextFieldFilled)](docs/components/TextField.md)
+- [Select (SelectFilled/SelectOutlined)](docs/components/Select.md)
+- [Amount](docs/components/Amount.md)
+- [DatePicker (+Docked) and DateRangePicker](docs/components/DatePicker.md)
+- [TimePicker (dial + input)](docs/components/TimePicker.md)
+
+### Navigation
+- [NavigationBar (+Item)](docs/components/NavigationBar.md)
+- [NavigationRail (+Item)](docs/components/NavigationRail.md)
+- [TopAppBar (Small/Center/Medium/Large)](docs/components/TopAppBar.md)
+- [DockedToolbar and FloatingToolbar](docs/components/Toolbar.md)
+- [TabsPrimary and TabsSecondary](docs/components/Tabs.md)
+- [LinkBox and LinkContainer](docs/components/Link.md)
+- [Search (+Input/Item)](docs/components/Search.md)
+
+### Menus
+- [Menu (+Item/+Group/+Sub/+Label/+Divider)](docs/components/Menu.md) — shared M3E vertical-menu primitive
+- [Dropdown (+Item)](docs/components/Dropdown.md)
+- [OverflowMenu (+Item)](docs/components/OverflowMenu.md)
+- [ToggleTheme and ToggleThemeMenu](docs/components/ToggleTheme.md)
+
+### Media and showcase
+- [Avatar](docs/components/Avatar.md)
+- [AvatarStack](docs/components/AvatarStack.md)
+- [Img](docs/components/Img.md)
+- [MediaFrame](docs/components/MediaFrame.md)
+- [Gallery (+Row)](docs/components/Gallery.md)
+- [Stories (+User/Business)](docs/components/Stories.md)
+- [Video](docs/components/Video.md)
+- [PerspectiveImage and PerspectiveCard](docs/components/Perspective.md)
+- [Blob](docs/components/Blob.md)
+
+### Text and icons
+- [TextElement](docs/components/TextElement.md)
+- [Icon](docs/components/Icon.md)
+- [MaterialSymbol](docs/components/MaterialSymbol.md)
+
+### Layout
+- [Layers: Container and Section](docs/components/Layers.md)

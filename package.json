@@ -1,0 +1,101 @@
+{
+  "name": "react-material-expressive",
+  "version": "1.0.0",
+  "description": "Material 3 Expressive React component library. Framework-agnostic, precompiled CSS, official M3 design tokens.",
+  "author": "Ger Silva",
+  "homepage": "https://github.com/gersilva96/react-material-expressive#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gersilva96/react-material-expressive.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gersilva96/react-material-expressive/issues"
+  },
+  "keywords": [
+    "react",
+    "material-design",
+    "material-3",
+    "m3-expressive",
+    "components",
+    "design-system",
+    "tailwind"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist",
+    "docs",
+    "CHANGELOG.md",
+    "README.md",
+    "llms.txt"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./theme.css": "./dist/theme.css",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build:css": "tailwindcss -i src/styles.css -o dist/styles.css --minify",
+    "build:lib": "tsup",
+    "copy:themes": "node scripts/copy-themes.mjs",
+    "build": "npm run clean && npm run build:css && npm run build:lib && npm run copy:themes",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "pack:dry": "npm pack --dry-run",
+    "prepack": "npm run build",
+    "prepublishOnly": "npm run lint && npm run typecheck && npm run test"
+  },
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },
+  "dependencies": {
+    "clsx": "2.1.1",
+    "tailwind-merge": "3.6.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@tailwindcss/cli": "4.3.0",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "14.6.1",
+    "@types/jest-axe": "3.5.9",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "eslint": "10.4.1",
+    "globals": "17.6.0",
+    "jest-axe": "10.0.0",
+    "jiti": "2.7.0",
+    "jsdom": "29.1.1",
+    "prettier": "3.8.3",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "rimraf": "6.1.3",
+    "tailwindcss": "4.3.0",
+    "tsup": "8.5.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.60.1",
+    "vitest": "4.1.9"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

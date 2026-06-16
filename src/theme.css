@@ -1,0 +1,187 @@
+/* react-material-expressive — Tailwind v4 theme partial.
+ *
+ * Maps Tailwind utilities to the runtime M3 design tokens (--md-sys-*).
+ * `inline` keeps the var(--md-sys-*) reference inside each utility, so
+ * utilities re-resolve per element and follow [data-theme]/.dark scopes
+ * at runtime.
+ *
+ * Two roles: styles.css imports it to build the precompiled dist/styles.css,
+ * AND it is published raw as `react-material-expressive/theme.css` so a
+ * consumer running their own Tailwind v4 can author the same M3 utilities.
+ * The token VALUES come from the imported styles.css (`:root`/`.dark`) or a
+ * Material Theme Builder paste:
+ *
+ *   @import "tailwindcss";
+ *   @import "react-material-expressive/theme.css";
+ */
+
+/* `dark:` follows the library's theme toggle (.dark / [data-theme="dark"]),
+ * not prefers-color-scheme, so consumer utilities match the components.
+ * Defined here so both this build and the published partial expose it. */
+@custom-variant dark (&:where(.dark, [data-theme="dark"], .dark *, [data-theme="dark"] *));
+
+@theme inline {
+  /* --- Color roles (M3: --md-sys-color-*) --- */
+  --color-primary: var(--md-sys-color-primary);
+  --color-surface-tint: var(--md-sys-color-surface-tint);
+  --color-on-primary: var(--md-sys-color-on-primary);
+  --color-primary-container: var(--md-sys-color-primary-container);
+  --color-on-primary-container: var(--md-sys-color-on-primary-container);
+  --color-secondary: var(--md-sys-color-secondary);
+  --color-on-secondary: var(--md-sys-color-on-secondary);
+  --color-secondary-container: var(--md-sys-color-secondary-container);
+  --color-on-secondary-container: var(--md-sys-color-on-secondary-container);
+  --color-tertiary: var(--md-sys-color-tertiary);
+  --color-on-tertiary: var(--md-sys-color-on-tertiary);
+  --color-tertiary-container: var(--md-sys-color-tertiary-container);
+  --color-on-tertiary-container: var(--md-sys-color-on-tertiary-container);
+  --color-error: var(--md-sys-color-error);
+  --color-on-error: var(--md-sys-color-on-error);
+  --color-error-container: var(--md-sys-color-error-container);
+  --color-on-error-container: var(--md-sys-color-on-error-container);
+  --color-background: var(--md-sys-color-background);
+  --color-on-background: var(--md-sys-color-on-background);
+  --color-surface: var(--md-sys-color-surface);
+  --color-on-surface: var(--md-sys-color-on-surface);
+  --color-surface-variant: var(--md-sys-color-surface-variant);
+  --color-on-surface-variant: var(--md-sys-color-on-surface-variant);
+  --color-outline: var(--md-sys-color-outline);
+  --color-outline-variant: var(--md-sys-color-outline-variant);
+  --color-shadow: var(--md-sys-color-shadow);
+  --color-scrim: var(--md-sys-color-scrim);
+  --color-inverse-surface: var(--md-sys-color-inverse-surface);
+  --color-inverse-on-surface: var(--md-sys-color-inverse-on-surface);
+  --color-inverse-primary: var(--md-sys-color-inverse-primary);
+  --color-primary-fixed: var(--md-sys-color-primary-fixed);
+  --color-on-primary-fixed: var(--md-sys-color-on-primary-fixed);
+  --color-primary-fixed-dim: var(--md-sys-color-primary-fixed-dim);
+  --color-on-primary-fixed-variant: var(
+    --md-sys-color-on-primary-fixed-variant
+  );
+  --color-secondary-fixed: var(--md-sys-color-secondary-fixed);
+  --color-on-secondary-fixed: var(--md-sys-color-on-secondary-fixed);
+  --color-secondary-fixed-dim: var(--md-sys-color-secondary-fixed-dim);
+  --color-on-secondary-fixed-variant: var(
+    --md-sys-color-on-secondary-fixed-variant
+  );
+  --color-tertiary-fixed: var(--md-sys-color-tertiary-fixed);
+  --color-on-tertiary-fixed: var(--md-sys-color-on-tertiary-fixed);
+  --color-tertiary-fixed-dim: var(--md-sys-color-tertiary-fixed-dim);
+  --color-on-tertiary-fixed-variant: var(
+    --md-sys-color-on-tertiary-fixed-variant
+  );
+  --color-surface-dim: var(--md-sys-color-surface-dim);
+  --color-surface-bright: var(--md-sys-color-surface-bright);
+  --color-surface-container-lowest: var(
+    --md-sys-color-surface-container-lowest
+  );
+  --color-surface-container-low: var(--md-sys-color-surface-container-low);
+  --color-surface-container: var(--md-sys-color-surface-container);
+  --color-surface-container-high: var(--md-sys-color-surface-container-high);
+  --color-surface-container-highest: var(
+    --md-sys-color-surface-container-highest
+  );
+
+  /* --- Shape scale (M3: --md-sys-shape-corner-*) --- */
+  --radius-none: var(--md-sys-shape-corner-none);
+  --radius-extra-small: var(--md-sys-shape-corner-extra-small);
+  --radius-small: var(--md-sys-shape-corner-small);
+  --radius-medium: var(--md-sys-shape-corner-medium);
+  --radius-large: var(--md-sys-shape-corner-large);
+  --radius-large-increased: var(--md-sys-shape-corner-large-increased);
+  --radius-extra-large: var(--md-sys-shape-corner-extra-large);
+  --radius-extra-large-increased: var(
+    --md-sys-shape-corner-extra-large-increased
+  );
+  --radius-extra-extra-large: var(--md-sys-shape-corner-extra-extra-large);
+  --radius-full: var(--md-sys-shape-corner-full);
+
+  /* --- Elevation (M3: --md-sys-elevation-level*) --- */
+  --shadow-mm-1: var(--md-sys-elevation-level1);
+  --shadow-mm-2: var(--md-sys-elevation-level2);
+  --shadow-mm-3: var(--md-sys-elevation-level3);
+  --shadow-mm-4: var(--md-sys-elevation-level4);
+  --shadow-mm-5: var(--md-sys-elevation-level5);
+
+  /* --- Typefaces (M3: --md-ref-typeface-*) --- */
+  --font-sans: var(--md-ref-typeface-plain);
+  --font-brand: var(--md-ref-typeface-brand);
+
+  /* --- Motion easings (M3 spec cubic-beziers) --- */
+  --ease-emphasized: var(--md-sys-motion-easing-emphasized);
+  --ease-emphasized-decelerate: var(
+    --md-sys-motion-easing-emphasized-decelerate
+  );
+  --ease-emphasized-accelerate: var(
+    --md-sys-motion-easing-emphasized-accelerate
+  );
+  --ease-standard: var(--md-sys-motion-easing-standard);
+  --ease-standard-decelerate: var(--md-sys-motion-easing-standard-decelerate);
+  --ease-standard-accelerate: var(--md-sys-motion-easing-standard-accelerate);
+  --ease-legacy: var(--md-sys-motion-easing-legacy);
+  --ease-md-linear: var(--md-sys-motion-easing-linear);
+}
+
+/* --- M3 type scale (static values; family inherits --md-ref-typeface-*) --- */
+@theme {
+  --text-display-large: 3.5625rem;
+  --text-display-large--line-height: 4rem;
+  --text-display-large--letter-spacing: -0.015625rem;
+  --text-display-large--font-weight: 400;
+  --text-display-medium: 2.8125rem;
+  --text-display-medium--line-height: 3.25rem;
+  --text-display-medium--letter-spacing: 0rem;
+  --text-display-medium--font-weight: 400;
+  --text-display-small: 2.25rem;
+  --text-display-small--line-height: 2.75rem;
+  --text-display-small--letter-spacing: 0rem;
+  --text-display-small--font-weight: 400;
+  --text-headline-large: 2rem;
+  --text-headline-large--line-height: 2.5rem;
+  --text-headline-large--letter-spacing: 0rem;
+  --text-headline-large--font-weight: 400;
+  --text-headline-medium: 1.75rem;
+  --text-headline-medium--line-height: 2.25rem;
+  --text-headline-medium--letter-spacing: 0rem;
+  --text-headline-medium--font-weight: 400;
+  --text-headline-small: 1.5rem;
+  --text-headline-small--line-height: 2rem;
+  --text-headline-small--letter-spacing: 0rem;
+  --text-headline-small--font-weight: 400;
+  --text-title-large: 1.375rem;
+  --text-title-large--line-height: 1.75rem;
+  --text-title-large--letter-spacing: 0rem;
+  --text-title-large--font-weight: 400;
+  --text-title-medium: 1rem;
+  --text-title-medium--line-height: 1.5rem;
+  --text-title-medium--letter-spacing: 0.009375rem;
+  --text-title-medium--font-weight: 500;
+  --text-title-small: 0.875rem;
+  --text-title-small--line-height: 1.25rem;
+  --text-title-small--letter-spacing: 0.00625rem;
+  --text-title-small--font-weight: 500;
+  --text-body-large: 1rem;
+  --text-body-large--line-height: 1.5rem;
+  --text-body-large--letter-spacing: 0.03125rem;
+  --text-body-large--font-weight: 400;
+  --text-body-medium: 0.875rem;
+  --text-body-medium--line-height: 1.25rem;
+  --text-body-medium--letter-spacing: 0.015625rem;
+  --text-body-medium--font-weight: 400;
+  --text-body-small: 0.75rem;
+  --text-body-small--line-height: 1rem;
+  --text-body-small--letter-spacing: 0.025rem;
+  --text-body-small--font-weight: 400;
+  --text-label-large: 0.875rem;
+  --text-label-large--line-height: 1.25rem;
+  --text-label-large--letter-spacing: 0.00625rem;
+  --text-label-large--font-weight: 500;
+  --text-label-medium: 0.75rem;
+  --text-label-medium--line-height: 1rem;
+  --text-label-medium--letter-spacing: 0.03125rem;
+  --text-label-medium--font-weight: 500;
+  --text-label-small: 0.6875rem;
+  --text-label-small--line-height: 1rem;
+  --text-label-small--letter-spacing: 0.03125rem;
+  --text-label-small--font-weight: 500;
+}

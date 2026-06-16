@@ -1,0 +1,7 @@
+node_modules
+dist
+storybook-static
+package-lock.json
+# Generated 1:1 by scripts/gen-loading-indicator.mjs — the generator is the
+# single source of truth (re-running it must leave git clean).
+src/components/progress-bar/_loadingIndicatorShapes.ts

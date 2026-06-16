@@ -1,0 +1,2304 @@
+/* react-material-expressive — precompiled stylesheet source.
+ *
+ * Built with the Tailwind CLI into dist/styles.css. Consumers import the
+ * compiled file and do NOT need Tailwind. All visual decisions resolve
+ * through runtime CSS variables (--md-sys-*), so themes swap at runtime
+ * via :root / .dark / [data-theme="..."] without recompiling.
+ */
+@import "tailwindcss";
+@import "./theme.css";
+
+/* Scan every published source folder so the precompiled CSS contains each
+ * utility the components use, independent of the build cwd. */
+@source "./components";
+@source "./elements";
+@source "./layers";
+
+/* Safelist the token-backed core scales so consumers WITHOUT Tailwind can
+ * use the full M3 type ramp, shape scale and elevation utilities even when
+ * no component referenced them. */
+@source inline("text-{display,headline,title,body,label}-{large,medium,small}");
+@source inline("rounded-{none,extra-small,small,medium,large,large-increased,extra-large,extra-large-increased,extra-extra-large,full}");
+@source inline("shadow-mm-{1,2,3,4,5}");
+@source inline("font-{sans,brand}");
+
+/* ------------------------------------------------------------------ */
+/* M3 design tokens — light scheme (Material Theme Builder export).     */
+/* A new Theme Builder export can replace each color block 1:1.         */
+/* ------------------------------------------------------------------ */
+:root {
+  --md-sys-color-primary: rgb(86 89 146);
+  --md-sys-color-surface-tint: rgb(86 89 146);
+  --md-sys-color-on-primary: rgb(255 255 255);
+  --md-sys-color-primary-container: rgb(224 224 255);
+  --md-sys-color-on-primary-container: rgb(62 66 120);
+  --md-sys-color-secondary: rgb(92 93 114);
+  --md-sys-color-on-secondary: rgb(255 255 255);
+  --md-sys-color-secondary-container: rgb(225 224 249);
+  --md-sys-color-on-secondary-container: rgb(68 69 89);
+  --md-sys-color-tertiary: rgb(34 106 77);
+  --md-sys-color-on-tertiary: rgb(255 255 255);
+  --md-sys-color-tertiary-container: rgb(169 242 204);
+  --md-sys-color-on-tertiary-container: rgb(0 82 55);
+  --md-sys-color-error: rgb(186 26 26);
+  --md-sys-color-on-error: rgb(255 255 255);
+  --md-sys-color-error-container: rgb(255 218 214);
+  --md-sys-color-on-error-container: rgb(147 0 10);
+  --md-sys-color-background: rgb(251 248 255);
+  --md-sys-color-on-background: rgb(27 27 33);
+  --md-sys-color-surface: rgb(251 248 255);
+  --md-sys-color-on-surface: rgb(27 27 33);
+  --md-sys-color-surface-variant: rgb(228 225 236);
+  --md-sys-color-on-surface-variant: rgb(70 70 79);
+  --md-sys-color-outline: rgb(119 118 128);
+  --md-sys-color-outline-variant: rgb(199 197 208);
+  --md-sys-color-shadow: rgb(0 0 0);
+  --md-sys-color-scrim: rgb(0 0 0);
+  --md-sys-color-inverse-surface: rgb(48 48 54);
+  --md-sys-color-inverse-on-surface: rgb(243 239 247);
+  --md-sys-color-inverse-primary: rgb(191 194 255);
+  --md-sys-color-primary-fixed: rgb(224 224 255);
+  --md-sys-color-on-primary-fixed: rgb(17 20 75);
+  --md-sys-color-primary-fixed-dim: rgb(191 194 255);
+  --md-sys-color-on-primary-fixed-variant: rgb(62 66 120);
+  --md-sys-color-secondary-fixed: rgb(225 224 249);
+  --md-sys-color-on-secondary-fixed: rgb(25 26 44);
+  --md-sys-color-secondary-fixed-dim: rgb(197 196 221);
+  --md-sys-color-on-secondary-fixed-variant: rgb(68 69 89);
+  --md-sys-color-tertiary-fixed: rgb(169 242 204);
+  --md-sys-color-on-tertiary-fixed: rgb(0 33 20);
+  --md-sys-color-tertiary-fixed-dim: rgb(142 213 177);
+  --md-sys-color-on-tertiary-fixed-variant: rgb(0 82 55);
+  --md-sys-color-surface-dim: rgb(220 217 224);
+  --md-sys-color-surface-bright: rgb(251 248 255);
+  --md-sys-color-surface-container-lowest: rgb(255 255 255);
+  --md-sys-color-surface-container-low: rgb(245 242 250);
+  --md-sys-color-surface-container: rgb(240 236 244);
+  --md-sys-color-surface-container-high: rgb(234 231 239);
+  --md-sys-color-surface-container-highest: rgb(228 225 233);
+
+  /* Shape scale */
+  --md-sys-shape-corner-none: 0px;
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-large-increased: 20px;
+  --md-sys-shape-corner-extra-large: 28px;
+  --md-sys-shape-corner-extra-large-increased: 32px;
+  --md-sys-shape-corner-extra-extra-large: 48px;
+  --md-sys-shape-corner-full: 9999px;
+
+  /* Elevation (M3 shadow pairs; use sparingly — tonal surfaces first) */
+  --md-sys-elevation-level1:
+    0 1px 2px 0 rgb(0 0 0 / 0.3), 0 1px 3px 1px rgb(0 0 0 / 0.15);
+  --md-sys-elevation-level2:
+    0 1px 2px 0 rgb(0 0 0 / 0.3), 0 2px 6px 2px rgb(0 0 0 / 0.15);
+  --md-sys-elevation-level3:
+    0 4px 8px 3px rgb(0 0 0 / 0.15), 0 1px 3px 0 rgb(0 0 0 / 0.3);
+  --md-sys-elevation-level4:
+    0 6px 10px 4px rgb(0 0 0 / 0.15), 0 2px 3px 0 rgb(0 0 0 / 0.3);
+  --md-sys-elevation-level5:
+    0 8px 12px 6px rgb(0 0 0 / 0.15), 0 4px 4px 0 rgb(0 0 0 / 0.3);
+
+  /* Typefaces: named, never imported. The consumer loads the fonts (or
+     * overrides the tokens); system-ui keeps everything readable without
+     * them. */
+  --md-ref-typeface-brand: "Google Sans", system-ui, sans-serif;
+  --md-ref-typeface-plain: "Google Sans Text", system-ui, sans-serif;
+
+  /* Motion easings (M3 spec; web approximation of Expressive springs) */
+  --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --md-sys-motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-standard-decelerate: cubic-bezier(0, 0, 0, 1);
+  --md-sys-motion-easing-standard-accelerate: cubic-bezier(0.3, 0, 1, 1);
+  --md-sys-motion-easing-legacy: cubic-bezier(0.4, 0, 0.2, 1);
+  --md-sys-motion-easing-linear: cubic-bezier(0, 0, 1, 1);
+  /* Expressive fast-spatial spring (Compose MotionScheme.expressive():
+     * damping 0.6 / stiffness 800) sampled as a 350ms linear() curve —
+     * peak overshoot 9.5% at 40%. Spring time is distance-independent,
+     * so one fixed duration is faithful. Pair with 350ms transitions. */
+  --md-sys-motion-spring-fast-spatial: linear(
+    0,
+    0.099 5%,
+    0.317 10%,
+    0.561 15%,
+    0.775 20%,
+    0.934 25%,
+    1.034 30%,
+    1.083 35%,
+    1.095 40%,
+    1.084 45%,
+    1.063 50%,
+    1.04 55%,
+    1.02 60%,
+    1.005 65%,
+    0.996 70%,
+    0.991 80%,
+    0.994 90%,
+    1
+  );
+  /* Expressive default-spatial spring (damping 0.8 / stiffness 380)
+     * sampled as a 450ms linear() — gentle 1.5% overshoot at 60%. Drives
+     * the navigation indicator, the rail expand/collapse and the item
+     * morphs. Pair with 450ms transitions. */
+  --md-sys-motion-spring-default-spatial: linear(
+    0,
+    0.091 6%,
+    0.28 11%,
+    0.483 17%,
+    0.66 22%,
+    0.796 28%,
+    0.891 33%,
+    0.953 39%,
+    0.988 44%,
+    1.007 50%,
+    1.014 56%,
+    1.015 61%,
+    1.013 67%,
+    1.007 78%,
+    1.003 89%,
+    1
+  );
+
+  /* Motion durations (M3 tokens, v0.192) */
+  --md-sys-motion-duration-short1: 50ms;
+  --md-sys-motion-duration-short2: 100ms;
+  --md-sys-motion-duration-short3: 150ms;
+  --md-sys-motion-duration-short4: 200ms;
+  --md-sys-motion-duration-medium1: 250ms;
+  --md-sys-motion-duration-medium2: 300ms;
+  --md-sys-motion-duration-medium3: 350ms;
+  --md-sys-motion-duration-medium4: 400ms;
+  --md-sys-motion-duration-long1: 450ms;
+  --md-sys-motion-duration-long2: 500ms;
+  --md-sys-motion-duration-long3: 550ms;
+  --md-sys-motion-duration-long4: 600ms;
+  --md-sys-motion-duration-extra-long1: 700ms;
+  --md-sys-motion-duration-extra-long2: 800ms;
+  --md-sys-motion-duration-extra-long3: 900ms;
+  --md-sys-motion-duration-extra-long4: 1000ms;
+
+  /* State layer opacities (M3 tokens, v0.192) */
+  --md-sys-state-hover-state-layer-opacity: 0.08;
+  --md-sys-state-focus-state-layer-opacity: 0.12;
+  --md-sys-state-pressed-state-layer-opacity: 0.12;
+  --md-sys-state-dragged-state-layer-opacity: 0.16;
+}
+
+/* M3 design tokens — dark scheme (same Theme Builder export) */
+.dark,
+[data-theme="dark"] {
+  --md-sys-color-primary: rgb(191 194 255);
+  --md-sys-color-surface-tint: rgb(191 194 255);
+  --md-sys-color-on-primary: rgb(39 43 96);
+  --md-sys-color-primary-container: rgb(62 66 120);
+  --md-sys-color-on-primary-container: rgb(224 224 255);
+  --md-sys-color-secondary: rgb(197 196 221);
+  --md-sys-color-on-secondary: rgb(46 47 66);
+  --md-sys-color-secondary-container: rgb(68 69 89);
+  --md-sys-color-on-secondary-container: rgb(225 224 249);
+  --md-sys-color-tertiary: rgb(142 213 177);
+  --md-sys-color-on-tertiary: rgb(0 56 36);
+  --md-sys-color-tertiary-container: rgb(0 82 55);
+  --md-sys-color-on-tertiary-container: rgb(169 242 204);
+  --md-sys-color-error: rgb(255 180 171);
+  --md-sys-color-on-error: rgb(105 0 5);
+  --md-sys-color-error-container: rgb(147 0 10);
+  --md-sys-color-on-error-container: rgb(255 218 214);
+  --md-sys-color-background: rgb(19 19 24);
+  --md-sys-color-on-background: rgb(228 225 233);
+  --md-sys-color-surface: rgb(19 19 24);
+  --md-sys-color-on-surface: rgb(228 225 233);
+  --md-sys-color-surface-variant: rgb(70 70 79);
+  --md-sys-color-on-surface-variant: rgb(199 197 208);
+  --md-sys-color-outline: rgb(145 143 154);
+  --md-sys-color-outline-variant: rgb(70 70 79);
+  --md-sys-color-shadow: rgb(0 0 0);
+  --md-sys-color-scrim: rgb(0 0 0);
+  --md-sys-color-inverse-surface: rgb(228 225 233);
+  --md-sys-color-inverse-on-surface: rgb(48 48 54);
+  --md-sys-color-inverse-primary: rgb(86 89 146);
+  --md-sys-color-primary-fixed: rgb(224 224 255);
+  --md-sys-color-on-primary-fixed: rgb(17 20 75);
+  --md-sys-color-primary-fixed-dim: rgb(191 194 255);
+  --md-sys-color-on-primary-fixed-variant: rgb(62 66 120);
+  --md-sys-color-secondary-fixed: rgb(225 224 249);
+  --md-sys-color-on-secondary-fixed: rgb(25 26 44);
+  --md-sys-color-secondary-fixed-dim: rgb(197 196 221);
+  --md-sys-color-on-secondary-fixed-variant: rgb(68 69 89);
+  --md-sys-color-tertiary-fixed: rgb(169 242 204);
+  --md-sys-color-on-tertiary-fixed: rgb(0 33 20);
+  --md-sys-color-tertiary-fixed-dim: rgb(142 213 177);
+  --md-sys-color-on-tertiary-fixed-variant: rgb(0 82 55);
+  --md-sys-color-surface-dim: rgb(19 19 24);
+  --md-sys-color-surface-bright: rgb(57 57 63);
+  --md-sys-color-surface-container-lowest: rgb(14 14 19);
+  --md-sys-color-surface-container-low: rgb(27 27 33);
+  --md-sys-color-surface-container: rgb(31 31 37);
+  --md-sys-color-surface-container-high: rgb(42 41 47);
+  --md-sys-color-surface-container-highest: rgb(53 52 58);
+}
+
+/* ------------------------------------------------------------------ */
+/* Animations (CSS-first Tailwind v4 theme)                             */
+/* Sheets/snackbar entrances: emphasized-decelerate 400ms; exits:       */
+/* emphasized-accelerate 200ms. Dialog and menus replicate the          */
+/* @material/web choreography: open 500ms emphasized, close 150ms       */
+/* emphasized-accelerate, scrim 500/150ms linear (overlays stay mounted */
+/* during exit via useDismissable).                                     */
+/* ------------------------------------------------------------------ */
+@theme {
+  --animate-fade-in: fade-in 400ms
+    var(--md-sys-motion-easing-emphasized-decelerate) both;
+  --animate-fade-out: fade-out 200ms
+    var(--md-sys-motion-easing-emphasized-accelerate) both;
+  --animate-scrim-in: fade-in 500ms var(--md-sys-motion-easing-linear) both;
+  --animate-scrim-out: fade-out 150ms var(--md-sys-motion-easing-linear) both;
+  --animate-scrim-sheet-in: fade-in 400ms var(--md-sys-motion-easing-linear)
+    both;
+  --animate-scrim-sheet-out: fade-out 200ms var(--md-sys-motion-easing-linear)
+    both;
+  --animate-scrim-drawer-in: fade-in 250ms var(--md-sys-motion-easing-linear)
+    both;
+  --animate-scrim-drawer-out: fade-out 250ms var(--md-sys-motion-easing-linear)
+    both;
+  --animate-dialog-in: dialog-in 500ms var(--md-sys-motion-easing-emphasized)
+    both;
+  --animate-dialog-out: dialog-out 150ms
+    var(--md-sys-motion-easing-emphasized-accelerate) both;
+  --animate-menu-in: menu-in 500ms var(--md-sys-motion-easing-emphasized) both;
+  --animate-menu-out: menu-out 150ms
+    var(--md-sys-motion-easing-emphasized-accelerate) both;
+  --animate-menu-in-up: menu-in-up 500ms var(--md-sys-motion-easing-emphasized)
+    both;
+  --animate-menu-out-up: menu-out-up 150ms
+    var(--md-sys-motion-easing-emphasized-accelerate) both;
+  --animate-transition-top: transition-top 400ms
+    var(--md-sys-motion-easing-emphasized-decelerate) both;
+  --animate-transition-bottom: transition-bottom 400ms
+    var(--md-sys-motion-easing-emphasized-decelerate) both;
+  --animate-transition-left: transition-left 400ms
+    var(--md-sys-motion-easing-emphasized-decelerate) both;
+  --animate-transition-right: transition-right 400ms
+    var(--md-sys-motion-easing-emphasized-decelerate) both;
+  --animate-transition-bottom-out: transition-bottom-out 200ms
+    var(--md-sys-motion-easing-emphasized-accelerate) both;
+  --animate-transition-left-out: transition-left-out 200ms
+    var(--md-sys-motion-easing-emphasized-accelerate) both;
+  --animate-transition-right-out: transition-right-out 200ms
+    var(--md-sys-motion-easing-emphasized-accelerate) both;
+  /* Snackbar (Compose SnackbarHost FadeInFadeOutWithScale): fade
+     * (fast-effects ≈ 150ms linear) + scale 0.8↔1 (fast-spatial spring),
+     * NOT a slide. */
+  --animate-snackbar-in:
+    fade-in 150ms var(--md-sys-motion-easing-linear) both,
+    snackbar-scale-in 350ms var(--md-sys-motion-spring-fast-spatial) both;
+  --animate-snackbar-out:
+    fade-out 150ms var(--md-sys-motion-easing-linear) both,
+    snackbar-scale-out 350ms var(--md-sys-motion-spring-fast-spatial) both;
+  --animate-blob: blob 10s ease-in-out infinite;
+  --animate-spin-lazy: spin-lazy 5s var(--md-sys-motion-easing-linear) infinite;
+
+  @keyframes spin-lazy {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes snackbar-scale-in {
+    from {
+      transform: scale(0.8);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @keyframes snackbar-scale-out {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(0.8);
+    }
+  }
+  @keyframes transition-top {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  @keyframes transition-bottom {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  @keyframes transition-left {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  @keyframes transition-right {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  @keyframes transition-bottom-out {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100%);
+    }
+  }
+  @keyframes transition-left-out {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  @keyframes transition-right-out {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes blob {
+    0%,
+    100% {
+      border-radius: 42% 58% 63% 37% / 51% 43% 57% 49%;
+    }
+    33% {
+      border-radius: 58% 42% 37% 63% / 43% 57% 49% 51%;
+    }
+    66% {
+      border-radius: 37% 63% 51% 49% / 57% 43% 63% 37%;
+    }
+  }
+  /* Dialog (@material/web): slides 50px while the container reveals its
+     * height from 35% to 100% (clip-path keeps the corners) and the panel
+     * fades in during the first 50ms (open) / the last 50ms (close). */
+  @keyframes dialog-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+      clip-path: inset(0 0 65% 0 round var(--md-sys-shape-corner-extra-large));
+    }
+    10% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: inset(0 0 0 0 round var(--md-sys-shape-corner-extra-large));
+    }
+  }
+  @keyframes dialog-out {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: inset(0 0 0 0 round var(--md-sys-shape-corner-extra-large));
+    }
+    66% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-50px);
+      clip-path: inset(0 0 65% 0 round var(--md-sys-shape-corner-extra-large));
+    }
+  }
+  /* Menus (@material/web): the container grows by revealing its height
+     * (clip-path keeps the content unsquished), surface fades 50ms. */
+  /* Static edges bleed out by --menu-clip-bleed (default 0; menus with a
+     * shadow set it negative) so the persisted clip-path — fill: both keeps
+     * the final inset applied — doesn't crop the box-shadow at rest, like
+     * the FABMenu/floatingToolbar reveal. Only the revealing edge animates. */
+  @keyframes menu-in {
+    0% {
+      clip-path: inset(
+        var(--menu-clip-bleed, 0px) var(--menu-clip-bleed, 0px) 100%
+          var(--menu-clip-bleed, 0px)
+      );
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    100% {
+      clip-path: inset(var(--menu-clip-bleed, 0px));
+      opacity: 1;
+    }
+  }
+  @keyframes menu-out {
+    0% {
+      clip-path: inset(var(--menu-clip-bleed, 0px));
+      opacity: 1;
+    }
+    66% {
+      opacity: 1;
+    }
+    100% {
+      clip-path: inset(
+        var(--menu-clip-bleed, 0px) var(--menu-clip-bleed, 0px) 100%
+          var(--menu-clip-bleed, 0px)
+      );
+      opacity: 0;
+    }
+  }
+  @keyframes menu-in-up {
+    0% {
+      clip-path: inset(
+        100% var(--menu-clip-bleed, 0px) var(--menu-clip-bleed, 0px)
+          var(--menu-clip-bleed, 0px)
+      );
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    100% {
+      clip-path: inset(var(--menu-clip-bleed, 0px));
+      opacity: 1;
+    }
+  }
+  @keyframes menu-out-up {
+    0% {
+      clip-path: inset(var(--menu-clip-bleed, 0px));
+      opacity: 1;
+    }
+    66% {
+      opacity: 1;
+    }
+    100% {
+      clip-path: inset(
+        100% var(--menu-clip-bleed, 0px) var(--menu-clip-bleed, 0px)
+          var(--menu-clip-bleed, 0px)
+      );
+      opacity: 0;
+    }
+  }
+}
+
+@layer base {
+  body {
+    font-family: var(--md-ref-typeface-plain);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Component classes. State layers follow M3: hover 8%, focus 10%,      */
+/* pressed 10%, with a currentColor overlay — never *-hover tokens.     */
+/* Disabled follows M3: container on-surface/12, content on-surface/38. */
+/* ------------------------------------------------------------------ */
+@layer components {
+  /* Generic state layer for any interactive item (list/menu/nav items,
+     * segmented buttons, tabs...). The overlay paints between the host's
+     * background and its content (isolate + negative z-index). */
+  .state-layer,
+  .btn,
+  .iconBtn,
+  .fab,
+  .fabExtended,
+  .chips {
+    position: relative;
+    isolation: isolate;
+  }
+  /* Two layers, like @material/web's md-ripple. Hover/focus live on
+     * ::after (background-color, 15ms linear). The press ripple lives on
+     * ::before: a radial-gradient surface whose geometry is animated from
+     * the pointer by the delegated listener in utils/_ripple.ts (grows
+     * 450ms standard, like ripple.ts); opacity fades in 105ms and lingers
+     * 375ms after release. Keyboard/no-JS presses fall back to the
+     * centered tile below. */
+  .state-layer::after,
+  .btn::after,
+  .iconBtn::after,
+  .fab::after,
+  .fabExtended::after,
+  .chips::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    border-radius: inherit;
+    background-color: transparent;
+    transition: background-color 15ms var(--md-sys-motion-easing-linear);
+  }
+  /* Gated like Tailwind v4 gates every hover: utility — on touch, a tap
+     * leaves the element matching :hover (sticky hover) and the 8% layer
+     * stayed painted after tapping. */
+  @media (hover: hover) {
+    .state-layer:hover::after,
+    .btn:hover::after,
+    .iconBtn:hover::after,
+    .fab:hover::after,
+    .fabExtended:hover::after,
+    .chips:hover::after {
+      background-color: color-mix(
+        in srgb,
+        currentColor calc(var(--md-sys-state-hover-state-layer-opacity) * 100%),
+        transparent
+      );
+    }
+  }
+  .state-layer:focus-visible::after,
+  .btn:focus-visible::after,
+  .iconBtn:focus-visible::after,
+  .fab:focus-visible::after,
+  .fabExtended:focus-visible::after,
+  .chips:focus-visible::after {
+    background-color: color-mix(
+      in srgb,
+      currentColor calc(var(--md-sys-state-focus-state-layer-opacity) * 100%),
+      transparent
+    );
+  }
+  .state-layer::before,
+  .btn::before,
+  .iconBtn::before,
+  .fab::before,
+  .fabExtended::before,
+  .chips::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0;
+    background-image: radial-gradient(
+      closest-side,
+      color-mix(
+          in srgb,
+          currentColor
+            calc(var(--md-sys-state-pressed-state-layer-opacity) * 100%),
+          transparent
+        )
+        max(calc(100% - 70px), 65%),
+      transparent 100%
+    );
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 250% 250%;
+    transition: opacity 375ms var(--md-sys-motion-easing-linear);
+  }
+  .state-layer:active::before,
+  .btn:active::before,
+  .iconBtn:active::before,
+  .fab:active::before,
+  .fabExtended:active::before,
+  .chips:active::before {
+    opacity: 1;
+    transition-duration: 105ms;
+  }
+  /* Chips draw their container edge with a real 1px border (outline,
+     * or transparent on selected/elevated where the background paints
+     * under it), so their layers grow past the padding box to tint the
+     * container edge to edge like mw's md-ripple. */
+  .chips::after,
+  .chips::before {
+    inset: -1px;
+  }
+  /* Input chip remove affordance: mw's chip touch span (48px tall,
+     * trailing-action wide) — the spec asks min 48dp for the close icon
+     * target, which necessarily bleeds past the 32dp container. */
+  .chipRemoveHit {
+    position: relative;
+  }
+  .chipRemoveHit::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 48px;
+    width: 34px;
+    transform: translate(-50%, -50%);
+  }
+  .state-layer:disabled::after,
+  .state-layer:disabled::before,
+  .state-layer[aria-disabled="true"]::after,
+  .state-layer[aria-disabled="true"]::before,
+  .btn:disabled::after,
+  .btn:disabled::before,
+  .iconBtn:disabled::after,
+  .iconBtn:disabled::before,
+  .fab:disabled::after,
+  .fab:disabled::before,
+  .fabExtended:disabled::after,
+  .fabExtended:disabled::before,
+  .chips:disabled::after,
+  .chips:disabled::before,
+  .chips[aria-disabled="true"]::after,
+  .chips[aria-disabled="true"]::before {
+    background-color: transparent;
+    opacity: 0;
+  }
+
+  /* M3 focus indicator (@material/web focus ring: 3px secondary, offset
+     * 2, entrance grows 0→8px in 150ms then settles to 3px in 450ms).
+     * outline-solid is required: Tailwind v4's outline-none sets
+     * --tw-outline-style: none and the width utilities only set
+     * outline-style: var(--tw-outline-style), so without the explicit
+     * solid the ring keeps style none and never paints. */
+  .state-layer,
+  .btn,
+  .iconBtn,
+  .fab,
+  .fabExtended,
+  .chips {
+    @apply outline-none focus-visible:outline-3 focus-visible:outline-solid focus-visible:outline-offset-2 focus-visible:outline-secondary;
+  }
+  /* Menu items (role=menuitem) are EXCLUDED from the ring entrance: they
+     * use roving focus, so replaying grow/shrink on every Arrow keypress
+     * reads as a distracting pulse. Crucially they also carry the
+     * menu-item-in stagger on the SAME `animation` property, so any rule that
+     * set `animation` on focus (the grow/shrink here, or an `animation: none`
+     * override) would TOGGLE the property on focus/blur and RESTART that
+     * fade+slide on each step. Excluding them leaves their `animation`
+     * untouched on focus → the static 3px ring shows (a11y) with no restart:
+     * a calm moving highlight like the Select listbox (which highlights via
+     * aria-activedescendant, no real focus). */
+  .state-layer:focus-visible:not([role="menuitem"]),
+  .btn:focus-visible,
+  .iconBtn:focus-visible,
+  .fab:focus-visible,
+  .fabExtended:focus-visible,
+  .chips:focus-visible {
+    animation:
+      focus-ring-grow 150ms var(--md-sys-motion-easing-emphasized),
+      focus-ring-shrink 450ms var(--md-sys-motion-easing-emphasized) 150ms
+        backwards;
+  }
+  /* Menu items carry NO outset focus ring. They use roving focus, so the
+     * 3px secondary ring jumped item-to-item as a stray gray border. The
+     * Select listbox (the sibling pattern) marks its active option with just
+     * bg-on-surface/8 and no ring — match that: the focus state layer
+     * (::after, ~10% on-surface) is the focus indicator. The :not() on the
+     * rule above already keeps the item's menu-item-in stagger from
+     * restarting on focus. */
+  [role="menuitem"]:focus-visible {
+    outline: none;
+  }
+
+  /* Tooltip (Compose Tooltip.kt AnimatedTooltip): shown on hover/
+     * focus-within after a 150ms appearance delay, animating fade
+     * (fast-effects ≈ 150ms linear) + scale 0.8↔1 FROM CENTER (fast-spatial
+     * spring) — the same FadeInFadeOutWithScale coreography as the Snackbar
+     * (graphicsLayer scaleX/Y = visible ? 1 : 0.8, alpha = visible ? 1 : 0,
+     * no transformOrigin set = center; plain and rich share it). Hover is
+     * gated under @media (hover:hover) so a touch tap doesn't leave it stuck
+     * open (AGENTS state-layer note); focus-within stays ungated for
+     * keyboard. The 150ms delay lives on the shown rules so only the
+     * APPEARANCE waits — hide is immediate. */
+  .tooltip {
+    opacity: 0;
+    transform: scale(0.8);
+    transition:
+      opacity 150ms var(--md-sys-motion-easing-linear),
+      transform 350ms var(--md-sys-motion-spring-fast-spatial);
+  }
+  .group:focus-within:not([data-dismissed]) > .tooltip {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: 150ms;
+  }
+  @media (hover: hover) {
+    .group:hover:not([data-dismissed]) > .tooltip {
+      opacity: 1;
+      transform: scale(1);
+      transition-delay: 150ms;
+    }
+  }
+
+  /* Elevation transitions at 280ms emphasized (@material/web button/
+     * fab _elevation.scss); other props (shape morph, colors) at 200ms. */
+  .btn,
+  .fab,
+  .fabExtended {
+    transition:
+      all 200ms var(--md-sys-motion-easing-emphasized),
+      box-shadow 280ms var(--md-sys-motion-easing-emphasized);
+  }
+
+  /* --- Button base (default size `s`: height 40, label-large, icon
+     * 20, gap 8). Per-size height/label come from the .btn.size* classes;
+     * symmetric padding and square radii are applied by the component. --- */
+  .btn {
+    @apply inline-flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full text-label-large whitespace-nowrap select-none disabled:cursor-not-allowed;
+  }
+  .btn.filled {
+    @apply bg-primary text-on-primary hover:shadow-mm-1 active:shadow-none disabled:bg-on-surface/12 disabled:text-on-surface/38 disabled:shadow-none;
+  }
+  .btn.tonal {
+    @apply bg-secondary-container text-on-secondary-container hover:shadow-mm-1 active:shadow-none disabled:bg-on-surface/12 disabled:text-on-surface/38 disabled:shadow-none;
+  }
+  .btn.elevated {
+    @apply bg-surface-container-low text-primary shadow-mm-1 hover:shadow-mm-2 active:shadow-mm-1 disabled:bg-on-surface/12 disabled:text-on-surface/38 disabled:shadow-none;
+  }
+  .btn.outlined {
+    @apply border border-outline bg-transparent text-primary disabled:border-on-surface/12 disabled:text-on-surface/38;
+  }
+  .btn.text {
+    @apply bg-transparent text-primary disabled:text-on-surface/38;
+  }
+
+  /* --- Icon button: 40x40 visual; the 48x48 touch target is a child
+     * span (the ::before pseudo belongs to the press ripple) --- */
+  .iconBtn {
+    @apply inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full transition-all duration-200 ease-emphasized select-none disabled:cursor-not-allowed;
+  }
+  .iconBtn.filled {
+    @apply bg-primary text-on-primary disabled:bg-on-surface/12 disabled:text-on-surface/38;
+  }
+  .iconBtn.tonal {
+    @apply bg-secondary-container text-on-secondary-container disabled:bg-on-surface/12 disabled:text-on-surface/38;
+  }
+  .iconBtn.outlined {
+    @apply border border-outline bg-transparent text-on-surface-variant disabled:border-on-surface/12 disabled:text-on-surface/38;
+  }
+  .iconBtn.standard {
+    @apply bg-transparent text-on-surface-variant disabled:text-on-surface/38;
+  }
+
+  /* --- FAB: 56/80/96 with shapes large/large-increased/extra-large
+     * (medium 80 is the M3 Expressive default, "most recommended"),
+     * level 3→4 --- */
+  .fab {
+    @apply inline-flex size-14 shrink-0 cursor-pointer items-center justify-center rounded-large shadow-mm-3 select-none hover:shadow-mm-4 active:shadow-mm-3 disabled:shadow-none;
+  }
+  .fab.fabMedium {
+    @apply size-20 rounded-large-increased;
+  }
+  .fab.fabLarge {
+    @apply size-24 rounded-extra-large;
+  }
+  /* Extended FAB small (M3E default; the spec retired the baseline:
+     * label went label-large → title-medium and the trailing padding
+     * 20 → 16). Sizes: medium 80 (title-large, icon 28, gap 12) / large
+     * 96 (headline-small, icon 36, gap 16) — values from the SITE token
+     * tables; the ExtendedFab*Tokens.kt files (v0_14_0) are stale on the
+     * gaps (16/20) and the large icon (32). */
+  .fabExtended {
+    @apply inline-flex h-14 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-large px-4 text-title-medium whitespace-nowrap shadow-mm-3 select-none hover:shadow-mm-4 active:shadow-mm-3 disabled:shadow-none;
+  }
+  .fabExtended.xfabMedium {
+    @apply h-20 gap-3 rounded-large-increased px-[26px] text-title-large;
+  }
+  .fabExtended.xfabLarge {
+    @apply h-24 gap-4 rounded-extra-large px-7 text-headline-small;
+  }
+  /* primary = primary-container (M3E default color style). */
+  .fab.primary,
+  .fabExtended.primary {
+    @apply bg-primary-container text-on-primary-container disabled:bg-on-surface/12 disabled:text-on-surface/38;
+  }
+  .fab.secondary,
+  .fabExtended.secondary {
+    @apply bg-secondary-container text-on-secondary-container disabled:bg-on-surface/12 disabled:text-on-surface/38;
+  }
+  .fab.tertiary,
+  .fabExtended.tertiary {
+    @apply bg-tertiary-container text-on-tertiary-container disabled:bg-on-surface/12 disabled:text-on-surface/38;
+  }
+
+  /* --- Chips: height 32, shape small, label-large.
+     * Padding 16 (8 on icon/remove side) applied by the component. --- */
+  .chips {
+    @apply inline-flex h-8 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-small text-label-large whitespace-nowrap select-none disabled:cursor-not-allowed;
+    /* mw chips snap elevation (no md-elevation transition), unlike
+         * buttons/FABs which animate it at 280ms. */
+    transition:
+      all 200ms var(--md-sys-motion-easing-emphasized),
+      box-shadow 0s;
+  }
+
+  /* --- Badges (shape full, error container) --- */
+  .badge {
+    @apply inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-error px-1 text-label-small text-on-error;
+  }
+  .dotBadge {
+    @apply inline-block size-1.5 rounded-full bg-error;
+  }
+  /* Spec badges: del vértice superior-trailing del icono al vértice
+     * inferior-leading del badge hay 14×12dp → top −2 y leading edge fijo
+     * a 12 del borde trailing; el badge crece hacia afuera (trailing). */
+  .onIconBadge {
+    @apply absolute -top-0.5 left-[calc(100%-12px)];
+  }
+
+  /* --- M3 Expressive button sizes (XS–XL). Heights + label scale here;
+     * paddings, icon sizes and square radii are applied per-size by the
+     * components. Round is the default .btn shape (full). --- */
+  .btn.sizeXs {
+    @apply h-8;
+  }
+  .btn.sizeS {
+    @apply h-10;
+  }
+  .btn.sizeM {
+    @apply h-14 text-title-medium;
+  }
+  .btn.sizeL {
+    @apply h-24 gap-3 text-headline-small;
+  }
+  .btn.sizeXl {
+    @apply h-34 gap-4 text-headline-large;
+  }
+
+  /* --- Standard button group (M3E): invisible flex container with
+     * per-size spacing (18/12/8/8/8). Pressing a button widens it and
+     * compresses its direct neighbors (Compose morphs width ~15%; here
+     * the padding morphs by the per-size --group-grow, animated by the
+     * .btn 200ms emphasized transition). Buttons inside should carry the
+     * matching `size` (symmetric padding = --group-px). The press-morph
+     * padding rules live UNLAYERED near .btnGroupConnected: they must
+     * out-cascade the buttons' own px-* utilities. --- */
+  .btnGroup {
+    @apply inline-flex w-fit items-center;
+  }
+  .btnGroup.groupXs {
+    gap: 18px;
+    --group-px: 12px;
+    --group-grow: 4px;
+  }
+  .btnGroup.groupS {
+    gap: 12px;
+    --group-px: 16px;
+    --group-grow: 6px;
+  }
+  .btnGroup.groupM {
+    gap: 8px;
+    --group-px: 24px;
+    --group-grow: 8px;
+  }
+  .btnGroup.groupL {
+    gap: 8px;
+    --group-px: 48px;
+    --group-grow: 12px;
+  }
+  .btnGroup.groupXl {
+    gap: 8px;
+    --group-px: 64px;
+    --group-grow: 16px;
+  }
+
+  /* --- FAB menu (M3E): the items are medium-button pills (h 56,
+     * title-medium, icon 24, paddings 24, icon-label gap 8) colored by
+     * the parent set (primary/secondary/tertiary containers); the close
+     * button is the 56dp FAB morphed to a circle. Items stagger in
+     * (approximation; the spec ships no web curves). --- */
+  .fabMenuItem {
+    @apply inline-flex h-14 shrink-0 cursor-pointer items-center gap-2 rounded-full px-6 text-title-medium whitespace-nowrap shadow-mm-3 select-none hover:shadow-mm-4;
+    transform-origin: bottom right;
+    transition:
+      all 200ms var(--md-sys-motion-easing-emphasized),
+      box-shadow 280ms var(--md-sys-motion-easing-emphasized);
+  }
+  .fabMenu.primary .fabMenuItem {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+  }
+  .fabMenu.secondary .fabMenuItem {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+  }
+  .fabMenu.tertiary .fabMenuItem {
+    background-color: var(--md-sys-color-tertiary-container);
+    color: var(--md-sys-color-on-tertiary-container);
+  }
+  /* The toggle FAB drives radius/colors from one checked-progress on the
+     * fast-spatial spring (ToggleFloatingActionButton); overrides the
+     * generic .fab 200ms emphasized transition. */
+  .fabMenuTrigger {
+    transition:
+      all 350ms var(--md-sys-motion-spring-fast-spatial),
+      box-shadow 280ms var(--md-sys-motion-easing-emphasized);
+  }
+  /* Stagger bottom-up from the FAB (the spec caps the menu at 6 items;
+     * items render as direct flex children so fragments work). Compose
+     * staggers by animating the visible-item COUNT with a slow-effects
+     * spring (total reveal time ~constant for any count); the fixed
+     * 33ms/item delays approximate that cadence. Items rise + scale on the
+     * 350ms fast-spatial spring (GPU transform, not a clip reveal — smoother);
+     * fade = 150ms linear (fast-effects approx). */
+  .fabMenuListIn .fabMenuItem {
+    animation:
+      fab-menu-item-rise 350ms var(--md-sys-motion-spring-fast-spatial) both,
+      fab-menu-item-fade-in 150ms var(--md-sys-motion-easing-linear) both;
+  }
+  .fabMenuListIn .fabMenuItem:nth-last-child(2) {
+    animation-delay: 33ms;
+  }
+  .fabMenuListIn .fabMenuItem:nth-last-child(3) {
+    animation-delay: 66ms;
+  }
+  .fabMenuListIn .fabMenuItem:nth-last-child(4) {
+    animation-delay: 99ms;
+  }
+  .fabMenuListIn .fabMenuItem:nth-last-child(5) {
+    animation-delay: 132ms;
+  }
+  .fabMenuListIn .fabMenuItem:nth-last-child(6) {
+    animation-delay: 165ms;
+  }
+  /* Exit mirrors the entrance top-down (Compose runs the same springs
+     * back to zero — no separate accelerate curve). */
+  .fabMenuListOut .fabMenuItem {
+    animation:
+      fab-menu-item-sink 350ms var(--md-sys-motion-spring-fast-spatial) both,
+      fab-menu-item-fade-out 150ms var(--md-sys-motion-easing-linear) both;
+  }
+  .fabMenuListOut .fabMenuItem:nth-child(2) {
+    animation-delay: 33ms;
+  }
+  .fabMenuListOut .fabMenuItem:nth-child(3) {
+    animation-delay: 66ms;
+  }
+  .fabMenuListOut .fabMenuItem:nth-child(4) {
+    animation-delay: 99ms;
+  }
+  .fabMenuListOut .fabMenuItem:nth-child(5) {
+    animation-delay: 132ms;
+  }
+  .fabMenuListOut .fabMenuItem:nth-child(6) {
+    animation-delay: 165ms;
+  }
+
+  /* --- Toolbars (M3E md.comp.toolbar): docked = full-width 64dp bar,
+     * paddings 16, default gap 32 (max-spacing), square corners, flat;
+     * floating = 64dp pill, paddings 8, gap 4, shape full, level 3
+     * (DSDB v34; Compose still carries a Level0 TODO). Standard scheme =
+     * surface-container, vibrant = primary-container. Expand/collapse
+     * runs on the fast-spatial spring (350ms linear() port). --- */
+  .dockedToolbar {
+    @apply flex h-16 w-full items-center justify-center gap-8 bg-surface-container px-4 text-on-surface;
+  }
+  .dockedToolbar.vibrant {
+    @apply bg-primary-container text-on-primary-container;
+  }
+  /* FABs inside a docked toolbar sit flat (bottom-app-bar rule). */
+  .dockedToolbar .fab {
+    @apply shadow-none hover:shadow-none active:shadow-none;
+  }
+
+  .floatingToolbar {
+    @apply relative inline-flex items-center justify-center;
+  }
+  .floatingHorizontal {
+    @apply h-16 flex-row;
+  }
+  .floatingVertical {
+    @apply w-16 flex-col;
+  }
+  /* With a FAB the footprint grows to the 80dp medium-FAB size and
+     * reserves FAB + 8dp gap on its side (Compose WithFabLayout keeps the
+     * total size constant; the pill clips toward the FAB instead). */
+  .floatingHorizontal.floatingWithFab {
+    @apply h-20 pe-16;
+  }
+  .floatingHorizontal.floatingWithFab.floatingFabStart {
+    @apply pe-0 ps-16;
+  }
+  .floatingVertical.floatingWithFab {
+    @apply w-20 pb-16;
+  }
+  .floatingVertical.floatingWithFab.floatingFabStart {
+    @apply pt-16 pb-0;
+  }
+
+  /* The collapse clip lives on a halo wrapper (16px padding canceled
+     * by negative margin → footprint neutral): clip-path clips the
+     * element's box-shadow too, so clipping the pill itself would erase
+     * its elevation at rest. The halo gives the shadow room; the rest
+     * clip exists only next to a FAB (the only collapse that clips). */
+  .floatingClip {
+    @apply -m-4 flex p-4;
+    transition: clip-path 350ms var(--md-sys-motion-spring-fast-spatial);
+  }
+  .floatingWithFab .floatingClip {
+    clip-path: inset(0 0 0 0 round 48px);
+  }
+  .floatingPill {
+    @apply flex rounded-full bg-surface-container p-2 text-on-surface shadow-mm-3;
+    transition: box-shadow 280ms var(--md-sys-motion-easing-emphasized);
+  }
+  .floatingHorizontal .floatingPill {
+    @apply h-16 flex-row items-center;
+  }
+  .floatingVertical .floatingPill {
+    @apply w-16 flex-col items-center;
+  }
+  .floatingToolbar.vibrant .floatingPill {
+    @apply bg-primary-container text-on-primary-container;
+  }
+  /* Next to a FAB the pill drops to level 1 (Compose WithFab) and to 0
+     * when collapsed; `flat` removes the elevation entirely (guideline
+     * for visually distinct backgrounds). */
+  .floatingWithFab .floatingPill {
+    @apply shadow-mm-1;
+  }
+  .floatingFlat .floatingPill,
+  .floatingCollapsed.floatingWithFab .floatingPill {
+    @apply shadow-none;
+  }
+  /* Collapsed with FAB: the pill clips away toward the FAB side. */
+  .floatingHorizontal.floatingCollapsed.floatingWithFab .floatingClip {
+    clip-path: inset(0 0 0 100% round 48px);
+  }
+  .floatingHorizontal.floatingCollapsed.floatingWithFab.floatingFabStart
+    .floatingClip {
+    clip-path: inset(0 100% 0 0 round 48px);
+  }
+  .floatingVertical.floatingCollapsed.floatingWithFab .floatingClip {
+    clip-path: inset(100% 0 0 0 round 48px);
+  }
+  .floatingVertical.floatingCollapsed.floatingWithFab.floatingFabStart
+    .floatingClip {
+    clip-path: inset(0 0 100% 0 round 48px);
+  }
+
+  /* Leading/trailing slots collapse via the 1fr→0fr grid trick (the
+     * only transition that animates to an unknown auto size). Content
+     * anchors mirror Compose: leading shrinks toward its end edge,
+     * trailing toward its start. */
+  .floatingSlot {
+    display: grid;
+    transition:
+      grid-template-columns 350ms var(--md-sys-motion-spring-fast-spatial),
+      grid-template-rows 350ms var(--md-sys-motion-spring-fast-spatial);
+  }
+  .floatingHorizontal .floatingSlot {
+    grid-template-columns: 1fr;
+  }
+  .floatingHorizontal.floatingCollapsed .floatingSlot {
+    grid-template-columns: 0fr;
+  }
+  .floatingVertical .floatingSlot {
+    grid-template-rows: 1fr;
+  }
+  .floatingVertical.floatingCollapsed .floatingSlot {
+    grid-template-rows: 0fr;
+  }
+  .floatingContent,
+  .floatingLeading,
+  .floatingTrailing {
+    @apply flex items-center gap-1;
+  }
+  .floatingLeading {
+    @apply min-h-0 min-w-0 justify-end overflow-hidden pe-1;
+  }
+  .floatingTrailing {
+    @apply min-h-0 min-w-0 overflow-hidden ps-1;
+  }
+  .floatingVertical .floatingContent,
+  .floatingVertical .floatingLeading,
+  .floatingVertical .floatingTrailing {
+    @apply flex-col;
+  }
+  .floatingVertical .floatingLeading {
+    @apply pe-0 pb-1;
+  }
+  .floatingVertical .floatingTrailing {
+    @apply ps-0 pt-1;
+  }
+
+  /* Adjacent FAB: 56dp at rest growing to the 80dp medium FAB while
+     * the toolbar collapses (icon 24 → 28 via scale); elevation level 2,
+     * hover 3 (Compose toolbar FAB, not the standalone 3→4). */
+  .floatingFab {
+    @apply absolute z-10 flex size-14 items-center justify-center;
+    transition:
+      width 350ms var(--md-sys-motion-spring-fast-spatial),
+      height 350ms var(--md-sys-motion-spring-fast-spatial);
+  }
+  .floatingCollapsed .floatingFab {
+    @apply size-20;
+  }
+  .floatingHorizontal .floatingFab {
+    @apply end-0 top-1/2 -translate-y-1/2;
+  }
+  .floatingHorizontal.floatingFabStart .floatingFab {
+    @apply end-auto start-0;
+  }
+  .floatingVertical .floatingFab {
+    @apply start-1/2 bottom-0 -translate-x-1/2;
+  }
+  .floatingVertical.floatingFabStart .floatingFab {
+    @apply top-0 bottom-auto;
+  }
+  .floatingFab .fab {
+    @apply size-full rounded-large shadow-mm-2 hover:shadow-mm-3 active:shadow-mm-2;
+    transition:
+      all 350ms var(--md-sys-motion-spring-fast-spatial),
+      box-shadow 280ms var(--md-sys-motion-easing-emphasized);
+  }
+  .floatingCollapsed .floatingFab .fab {
+    @apply rounded-large-increased;
+  }
+  .floatingFab .fab > span {
+    transition: scale 350ms var(--md-sys-motion-spring-fast-spatial);
+  }
+  .floatingCollapsed .floatingFab .fab > span {
+    scale: 1.167;
+  }
+
+  /* --- Navigation bar + rail (M3E md.comp.nav-bar / md.comp.nav-rail):
+     * shared item anatomy. The pill (.navPill) is the state-layer/ripple
+     * host at full indicator size (Compose IndicatorRipple); the colored
+     * indicator is a child that springs width + alpha — it expands from
+     * the center on one axis (default-spatial spring, mw labs animates
+     * the same pair at 100ms pre-Expressive). Item state layers are
+     * always on-secondary-container (active and inactive); icon/label
+     * colors: active on-secondary-container / secondary, inactive
+     * on-surface-variant. --- */
+  .navPill {
+    @apply relative isolate flex shrink-0 cursor-pointer items-center justify-center rounded-full text-on-secondary-container;
+  }
+  .navIndicator {
+    position: absolute;
+    inset-block: 0;
+    left: 50%;
+    translate: -50%;
+    width: var(--nav-ind-rest, 32px);
+    z-index: -3;
+    border-radius: inherit;
+    background-color: var(--md-sys-color-secondary-container);
+    opacity: 0;
+    transition:
+      width 450ms var(--md-sys-motion-spring-default-spatial),
+      opacity 450ms var(--md-sys-motion-spring-default-spatial);
+  }
+  .navActive .navIndicator {
+    width: var(--nav-ind-full, 56px);
+    opacity: 1;
+  }
+  .navPillRow {
+    --nav-ind-rest: 60%;
+    --nav-ind-full: 100%;
+  }
+  .navIcon {
+    @apply relative text-on-surface-variant transition-colors duration-200;
+  }
+  .navActive .navIcon {
+    @apply text-on-secondary-container;
+  }
+  .navLabel {
+    @apply text-label-medium text-on-surface-variant transition-colors duration-200;
+  }
+  .navActive .navLabel {
+    color: var(--md-sys-color-secondary);
+  }
+  /* Horizontal item (nav bar medium-window pill): the active label lives
+     * INSIDE the pill on the indicator, so it takes on-secondary-container
+     * to match the icon — not the `secondary` the vertical item's
+     * below-label uses on the surface (NavigationBarHorizontalItem; same as
+     * the expanded rail's side label). */
+  .navActive .navPillRow .navLabel {
+    color: var(--md-sys-color-on-secondary-container);
+  }
+  /* Item-wide interactions light the pill (Compose remaps the item's
+     * interactions into the indicator): hover/focus tint, centered press
+     * tile when pressing outside the pill (the pointer ripple itself only
+     * triggers from within the pill subtree — see .navHit). */
+  .navItem {
+    @apply flex cursor-pointer outline-none select-none;
+  }
+  @media (hover: hover) {
+    .navItem:hover .navPill::after {
+      background-color: color-mix(
+        in srgb,
+        currentColor calc(var(--md-sys-state-hover-state-layer-opacity) * 100%),
+        transparent
+      );
+    }
+  }
+  .navItem:focus-visible .navPill::after {
+    background-color: color-mix(
+      in srgb,
+      currentColor calc(var(--md-sys-state-focus-state-layer-opacity) * 100%),
+      transparent
+    );
+  }
+  .navItem:active .navPill::before {
+    opacity: 1;
+    transition-duration: 105ms;
+  }
+  .navItem:focus-visible .navPill {
+    outline: 3px solid var(--md-sys-color-secondary);
+    outline-offset: 2px;
+    animation:
+      focus-ring-grow 150ms var(--md-sys-motion-easing-emphasized),
+      focus-ring-shrink 450ms var(--md-sys-motion-easing-emphasized) 150ms
+        backwards;
+  }
+  /* Pointer-ripple hit extender: a pill child stretched over the rest
+     * of the item so presses on the label also start the ripple from the
+     * pill's geometry. */
+  .navHit {
+    @apply pointer-events-auto absolute -inset-x-2 -top-2 -bottom-7;
+  }
+
+  /* Navigation bar container: M3E flexible bar is 64dp (the baseline
+     * 80dp survives as `tall`); vertical items split the width equally,
+     * horizontal items split a centered band. */
+  .navBar {
+    @apply flex h-16 w-full flex-row items-center bg-surface-container text-on-surface;
+  }
+  /* Horizontal items live in a centered band that depends on the item
+     * count (Compose CenteredContentMeasurePolicy: 3 items occupy 60% of
+     * the bar, 4 → 70%, 5 → 80%, 6 → 90%, 7+ full width), split equally
+     * with each pill centered in its slot. */
+  .navBar.navCentered {
+    @apply justify-center;
+  }
+  /* Edge margins instead of padding: child margin percentages resolve
+     * against the BAR itself, while padding %s resolve against the
+     * parent and break as soon as the bar is narrower than it. */
+  .navBar.navCentered:has(> :nth-child(3):last-child) > :first-child {
+    margin-inline-start: 20%;
+  }
+  .navBar.navCentered:has(> :nth-child(3):last-child) > :last-child {
+    margin-inline-end: 20%;
+  }
+  .navBar.navCentered:has(> :nth-child(4):last-child) > :first-child {
+    margin-inline-start: 15%;
+  }
+  .navBar.navCentered:has(> :nth-child(4):last-child) > :last-child {
+    margin-inline-end: 15%;
+  }
+  .navBar.navCentered:has(> :nth-child(5):last-child) > :first-child {
+    margin-inline-start: 10%;
+  }
+  .navBar.navCentered:has(> :nth-child(5):last-child) > :last-child {
+    margin-inline-end: 10%;
+  }
+  .navBar.navCentered:has(> :nth-child(6):last-child) > :first-child {
+    margin-inline-start: 5%;
+  }
+  .navBar.navCentered:has(> :nth-child(6):last-child) > :last-child {
+    margin-inline-end: 5%;
+  }
+  .navBar .navItemV {
+    @apply h-full flex-1 py-1.5;
+  }
+  /* Vertical item: 32x56 indicator pill over a 24 icon, label below
+     * (gap 4). */
+  .navItemV {
+    @apply flex-col items-center justify-center gap-1;
+  }
+  .navItemV .navPill {
+    @apply h-8 w-14;
+  }
+  /* Horizontal item (medium windows): everything lives inside a 40dp
+     * pill — icon 24 + label with 16dp paddings, 4dp icon-label gap —
+     * centered within its equal-width slot. The slots split the band
+     * equally while space allows but never shrink below the pill
+     * (Compose lets needy items outgrow the band into the padding). */
+  .navItemH {
+    @apply flex-1 items-center justify-center;
+    min-width: max-content;
+  }
+  .navItemH .navPill {
+    @apply h-10 gap-1 px-4;
+  }
+
+  /* --- Navigation rail (M3E): collapsed 96dp (narrow 80) on surface,
+     * top-space 44; expanded 220dp standard (modal: surface-container,
+     * level 2, large end corners). The width springs default-spatial
+     * (fast-spatial when modal) and DRIVES the whole morph, exactly like
+     * Compose: items are a single always-row pill stretched by the rail
+     * width (w-full — no px↔% animation), the height springs 32→56, the
+     * below-label collapses (grid rows) while the side-label reveals
+     * inside the growing pill (grid cols). Nothing crossfades between
+     * duplicated faces, so the rail never empties mid-morph (official
+     * overview video). --- */
+  .rail {
+    @apply flex h-full flex-col bg-surface pt-11 text-on-surface;
+    width: 96px;
+    transition: width 450ms var(--md-sys-motion-spring-default-spatial);
+  }
+  .rail.railNarrow {
+    width: 80px;
+  }
+  .rail.railExpanded {
+    /* Spec range 220–360; override per layout via the custom prop. */
+    width: var(--rail-expanded-width, 220px);
+  }
+  /* Everything in the rail is left-anchored in BOTH states (align-items
+     * can't animate, so flipping it caused jumps when collapsing); the
+     * menu/bottom slots sit in fixed 56dp centering boxes (.railSlot)
+     * that line up with the collapsed pill column. The vertical rhythm
+     * (items gap 4↔0, item min-height 64↔content) TRANSITIONS — the
+     * official collapse relaxes the pitch gradually, it never snaps. */
+  .railHeader {
+    @apply mb-10 flex w-full flex-col items-start gap-1 px-5;
+  }
+  .railSlot {
+    @apply flex w-14 flex-col items-center;
+  }
+  /* Side padding stays constant (20dp; 12 on narrow so the 56dp pill
+     * fits) so the item width follows the animating rail width
+     * continuously. */
+  .railItems {
+    @apply flex w-full flex-col items-start overflow-x-hidden overflow-y-auto px-5;
+    gap: 4px;
+    transition: gap 450ms var(--md-sys-motion-spring-default-spatial);
+  }
+  .railNarrow .railItems {
+    @apply px-3;
+  }
+  .railExpanded .railItems {
+    gap: 0px;
+  }
+  .railBottom {
+    @apply mt-auto flex w-full flex-col items-start gap-1 px-5 pb-11;
+  }
+  /* Rail item: a column with the row pill on top and the below-label
+     * underneath. The pill hugs its content in BOTH states (Compose
+     * measures rail items with loose constraints — the expanded pill
+     * wraps icon + label + paddings, it is NOT full width): collapsed the
+     * side slot is 0fr so 16+24+16 gives the exact 56x32 indicator, and
+     * the slot's 0fr→1fr morph is what stretches the pill open. The pill
+     * left edge stays put (items padding 20) so icons never move. */
+  .railItem {
+    @apply w-full flex-col items-start justify-center;
+    /* Explicit height (64 collapsed / 56 expanded) instead of a
+         * min-height: max(content, min-height) is non-monotonic while
+         * the concurrent springs run (the item dipped to ~52 then grew
+         * back, bouncing the icons up and down); two lengths interpolate
+         * monotonically, the icon travels 22→28 in one direction and the
+         * content meets the height exactly at the endpoints. */
+    height: 64px;
+    transition: height 450ms var(--md-sys-motion-spring-default-spatial);
+  }
+  .railExpanded .railItem {
+    @apply w-fit;
+    height: 56px;
+  }
+  .railRowPill {
+    @apply h-8 justify-start px-4;
+    --nav-ind-rest: 32px;
+    --nav-ind-full: 100%;
+    transition: height 450ms var(--md-sys-motion-spring-default-spatial);
+  }
+  .railExpanded .railRowPill {
+    @apply h-14 text-label-large;
+    --nav-ind-rest: 60%;
+  }
+  /* Side label inside the pill: 0fr→1fr + fade-in once the width is
+     * moving (out fast when collapsing). */
+  .railSide {
+    display: grid;
+    grid-template-columns: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-columns 450ms var(--md-sys-motion-spring-default-spatial),
+      opacity 100ms var(--md-sys-motion-easing-emphasized-accelerate);
+  }
+  .railExpanded .railSide {
+    grid-template-columns: 1fr;
+    opacity: 1;
+    transition:
+      grid-template-columns 450ms var(--md-sys-motion-spring-default-spatial),
+      opacity 250ms var(--md-sys-motion-easing-linear) 100ms;
+  }
+  .railSide > span {
+    /* The icon-label gap is padding so it can't hold the 0fr track
+         * open while collapsed (padding is not compressible) — it
+         * springs in with the slot. The side label (only visible expanded)
+         * is label-large per the horizontal item token, overriding the
+         * label-medium that .navLabel carries for the collapsed below-label
+         * (NavigationRailHorizontalItemTokens.LabelTextFont = LabelLarge). */
+    @apply min-w-0 overflow-hidden text-label-large whitespace-nowrap;
+    padding-inline-start: 0;
+    transition: padding-inline-start 450ms
+      var(--md-sys-motion-spring-default-spatial);
+  }
+  /* The expanded active label sits inside the pill on the indicator, so
+     * it takes on-secondary-container (matching the icon) instead of the
+     * `secondary` the below-label uses on the surface (horizontal item:
+     * "on secondary container"; the .navActive .navLabel rule below sets
+     * secondary, this wins by the extra type selector). */
+  .navActive .railSide > span {
+    color: var(--md-sys-color-on-secondary-container);
+  }
+  .railExpanded .railSide > span {
+    padding-inline-start: 8px;
+  }
+  /* Below label: 1fr→0fr + fade mirroring the side label. */
+  .railBelow {
+    display: grid;
+    grid-template-rows: 1fr;
+    /* The column is pinned to the box (otherwise the implicit track
+         * grows to the label's max-content and centering drifts). */
+    grid-template-columns: 100%;
+    /* As wide as the pill, with the (possibly wider) label centered
+         * on it overflowing symmetrically — like the spec renders
+         * "Favorites" on a 56dp pill. */
+    width: 56px;
+    justify-items: center;
+    opacity: 1;
+    transition:
+      grid-template-rows 450ms var(--md-sys-motion-spring-default-spatial),
+      opacity 250ms var(--md-sys-motion-easing-linear) 100ms;
+  }
+  .railExpanded .railBelow {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows 450ms var(--md-sys-motion-spring-default-spatial),
+      opacity 100ms var(--md-sys-motion-easing-emphasized-accelerate);
+  }
+  .railBelow > span {
+    @apply min-h-0 whitespace-nowrap;
+    width: max-content;
+    /* x visible (label overflow), y clip (the 1fr→0fr collapse). */
+    overflow: visible clip;
+    /* The pill-label gap is transitioned for the same reason as the
+         * side label's: static padding holds the 0fr row 4px open. */
+    padding-top: 4px;
+    transition: padding-top 450ms var(--md-sys-motion-spring-default-spatial);
+  }
+  .railExpanded .railBelow > span {
+    padding-top: 0;
+  }
+  /* Expanded rows sit flush — keep the press-trigger extender from
+     * bleeding into the neighbor below. */
+  .railExpanded .railItem .navHit {
+    inset: 0;
+  }
+  /* Rail FAB: coplanar (no shadow, like the docked bars); collapsed a
+     * 56dp FAB, expanded an extended FAB whose label reveals via the
+     * 0fr→1fr grid morph. */
+  .railFab {
+    @apply flex h-14 cursor-pointer items-center rounded-large bg-primary-container px-4 text-on-primary-container select-none;
+  }
+  .railFabLabel {
+    display: grid;
+    grid-template-columns: 0fr;
+    transition: grid-template-columns 450ms
+      var(--md-sys-motion-spring-default-spatial);
+  }
+  .railExpanded .railFabLabel {
+    grid-template-columns: 1fr;
+  }
+  .railFabLabel > span {
+    @apply min-w-0 overflow-hidden text-label-large whitespace-nowrap;
+    /* Transitioned like the item side-label: a static padding can't
+         * compress with the 0fr track and would snap on collapse. */
+    padding-inline-start: 0;
+    transition: padding-inline-start 450ms
+      var(--md-sys-motion-spring-default-spatial);
+  }
+  .railExpanded .railFabLabel > span {
+    padding-inline-start: 8px;
+  }
+  /* Modal expanded rail: a full-window drawer overlay. Two concerns split:
+     *  - .railModalOpen (open + closing lifecycle) makes it `fixed` so it spans
+     *    the available window height like the 32% scrim — h-full on a FIXED box
+     *    resolves against the viewport, not the collapsed-footprint wrapper.
+     *  - the surface (surface-container / level 2 = shadow-mm-2 / corner-large
+     *    16 trailing) rides .railExpanded and eases IN/OUT 250ms emphasized in
+     *    LOCKSTEP with the width, so the drawer DEFLATES smoothly into the rail
+     *    (radius/shadow/fill leave together with the width, nothing lingers on
+     *    the already-collapsed rail). This favours a smooth deflate over the
+     *    constant-surface + late-unmount model, which reads as a 1-frame pop on
+     *    the 96px rail when expressed in a single morphing element. */
+  .railModal {
+    @apply absolute top-0 left-0 z-50 h-full;
+    transition:
+      width 350ms var(--md-sys-motion-spring-fast-spatial),
+      background-color 250ms var(--md-sys-motion-easing-emphasized),
+      box-shadow 250ms var(--md-sys-motion-easing-emphasized),
+      border-radius 250ms var(--md-sys-motion-easing-emphasized);
+  }
+  .railModalOpen {
+    @apply fixed;
+  }
+  .railModal.railExpanded {
+    @apply rounded-r-large bg-surface-container shadow-mm-2;
+  }
+
+  /* --- Split button: while the menu is open the trailing button keeps
+     * a persistent pressed-opacity state layer (the spec applies only a
+     * state layer on selected — container colors never change). The
+     * .btn.splitOpen compound ties the (0,2,0) specificity of the shared
+     * .btn:hover/.btn:focus-visible ::after rules and wins by order;
+     * with the bare .splitOpen the hover rule overrode the open layer
+     * back to 8% whenever the pointer stayed on the button (the
+     * guideline video shows the 12% layer persisting under the cursor). */
+  .btn.splitOpen::after {
+    background-color: color-mix(
+      in srgb,
+      currentColor calc(var(--md-sys-state-pressed-state-layer-opacity) * 100%),
+      transparent
+    );
+  }
+
+  /* --- Circular indeterminate spinner (_Spinner; shared by Circle
+     * indeterminate + Loading): an SVG arc that grows/shrinks (~10°↔270°) while
+     * it spins, with rounded caps so it matches the determinate Circle and the
+     * M3 spec. (@material/web's border-based indeterminate leaves the caps flat;
+     * this deviates on purpose for visual consistency.) pathLength=100 keeps the
+     * dash keyframe size-independent. --- */
+  .circularIndeterminate {
+    animation: circular-spin 1568ms linear infinite;
+  }
+  /* Flat spinner draws a <circle>; the wavy spinner a rippled <path> — both
+     * grow/shrink with the same dash keyframes (pathLength=100). */
+  .circularIndeterminate :is(circle, path) {
+    animation: circular-dash 1333ms ease-in-out infinite;
+  }
+
+  /* --- Checkbox mark draw (@material/web: enter 350ms emphasized-
+     * decelerate, exit 150ms emphasized-accelerate, color 50ms linear).
+     * Driven by the sibling native input (.peer). --- */
+  .checkDraw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    opacity: 0;
+    transition:
+      stroke-dashoffset 150ms var(--md-sys-motion-easing-emphasized-accelerate),
+      opacity 50ms var(--md-sys-motion-easing-linear);
+  }
+  :where(input:checked) ~ * .checkDraw {
+    stroke-dashoffset: 0;
+    opacity: 1;
+    transition:
+      stroke-dashoffset 350ms var(--md-sys-motion-easing-emphasized-decelerate),
+      opacity 50ms var(--md-sys-motion-easing-linear);
+  }
+
+  /* --- Switch motion (M3 Expressive): the thumb slides + resizes with the
+     * fast-spatial spring (Compose `MotionSchemeKeyTokens.FastSpatial`,
+     * damping 0.6/stiffness 800 → 350ms `linear()`) on toggle, and GROWS on
+     * press over 100ms linear (@material/web `_handle.scss`); colors 67ms
+     * linear. Compose snaps the press grow (`SnapSpec`) for instant touch
+     * feedback, but a hard snap reads as a pop on a mouse click — the web uses
+     * mw's 100ms-linear grow instead. --- */
+  .switchTrack {
+    transition:
+      background-color 67ms var(--md-sys-motion-easing-linear),
+      border-color 67ms var(--md-sys-motion-easing-linear);
+  }
+  .switchHandle {
+    transition:
+      left 350ms var(--md-sys-motion-spring-fast-spatial),
+      width 350ms var(--md-sys-motion-spring-fast-spatial),
+      height 350ms var(--md-sys-motion-spring-fast-spatial),
+      background-color 67ms var(--md-sys-motion-easing-linear),
+      color 67ms var(--md-sys-motion-easing-linear);
+  }
+  /* Press grows the handle over 100ms linear (@material/web `_handle.scss`,
+     * `:active` 100ms linear); release springs back via the base rule. */
+  .group:active .switchHandle {
+    transition:
+      left 100ms var(--md-sys-motion-easing-linear),
+      width 100ms var(--md-sys-motion-easing-linear),
+      height 100ms var(--md-sys-motion-easing-linear),
+      background-color 67ms var(--md-sys-motion-easing-linear),
+      color 67ms var(--md-sys-motion-easing-linear);
+  }
+  .switchLayer {
+    transition:
+      left 350ms var(--md-sys-motion-spring-fast-spatial),
+      opacity 15ms var(--md-sys-motion-easing-linear),
+      background-color 15ms var(--md-sys-motion-easing-linear);
+  }
+
+  /* --- Peer-driven state layers (checkbox/radio/slider): ripple
+     * timings — hover/focus 15ms linear, press fade-in 105ms. --- */
+  .peerLayer {
+    transition:
+      opacity 15ms var(--md-sys-motion-easing-linear),
+      background-color 15ms var(--md-sys-motion-easing-linear);
+  }
+  :where(input:active) ~ .peerLayer {
+    transition-duration: 105ms;
+  }
+
+  /* --- Radio dot (M3 Expressive): grows with the fast-spatial spring
+     * (Compose `RadioButton` animates the dot radius with
+     * `MotionSchemeKeyTokens.FastSpatial`), fades 50ms linear. Tailwind v4
+     * scale utilities set the `scale` property, not `transform`. --- */
+  .radioDot {
+    transition:
+      scale 350ms var(--md-sys-motion-spring-fast-spatial),
+      opacity 50ms var(--md-sys-motion-easing-linear);
+  }
+
+  /* --- M3E: menu items stagger in during the 500ms reveal (25ms per
+     * item, capped at the 9th — approximation, the spec publishes no web
+     * curves). Applies to every surface using the shared menu-in
+     * animations: overflow/dropdown/theme menus, selects and the split
+     * button menu. --- */
+  .animate-menu-in > *,
+  .animate-menu-in-up > * {
+    animation: menu-item-in 200ms var(--md-sys-motion-easing-emphasized) both;
+  }
+  .animate-menu-in > :nth-child(2),
+  .animate-menu-in-up > :nth-child(2) {
+    animation-delay: 25ms;
+  }
+  .animate-menu-in > :nth-child(3),
+  .animate-menu-in-up > :nth-child(3) {
+    animation-delay: 50ms;
+  }
+  .animate-menu-in > :nth-child(4),
+  .animate-menu-in-up > :nth-child(4) {
+    animation-delay: 75ms;
+  }
+  .animate-menu-in > :nth-child(5),
+  .animate-menu-in-up > :nth-child(5) {
+    animation-delay: 100ms;
+  }
+  .animate-menu-in > :nth-child(6),
+  .animate-menu-in-up > :nth-child(6) {
+    animation-delay: 125ms;
+  }
+  .animate-menu-in > :nth-child(7),
+  .animate-menu-in-up > :nth-child(7) {
+    animation-delay: 150ms;
+  }
+  .animate-menu-in > :nth-child(8),
+  .animate-menu-in-up > :nth-child(8) {
+    animation-delay: 175ms;
+  }
+  .animate-menu-in > :nth-child(n + 9),
+  .animate-menu-in-up > :nth-child(n + 9) {
+    animation-delay: 200ms;
+  }
+
+  /* --- Linear progress indeterminate. Flat is @material/web's two-bar: a
+     * primary + a secondary bar translate and scale across the track (2s, MDC
+     * cubic-beziers). Wavy reuses that same choreography — two primary wave
+     * segments (.waveSeg) sweep across via clip-path head/tail keyframes
+     * derived from the flat translate/scale timing (see gen script in repo
+     * history), each showing the determinate traveling sine (see .wavePhase).
+     * --- */
+  .linearBar {
+    position: absolute;
+    inset-block: 0;
+    width: 100%;
+    transform-origin: left center;
+  }
+  .linearBarInner {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: currentColor;
+  }
+  .linearPrimaryBar {
+    inset-inline-start: -145.167%;
+    animation: linear-primary-translate 2s linear infinite;
+  }
+  .linearPrimaryBar > .linearBarInner {
+    animation: linear-primary-scale 2s linear infinite;
+  }
+  .linearSecondaryBar {
+    inset-inline-start: -54.8889%;
+    animation: linear-secondary-translate 2s linear infinite;
+  }
+  .linearSecondaryBar > .linearBarInner {
+    animation: linear-secondary-scale 2s linear infinite;
+  }
+  /* --- M3 Expressive wavy linear progress: phase shifter for the sine
+     * stroke — one wavelength (40px) per second, shared by the determinate
+     * active indicator and both indeterminate wave segments. --- */
+  .wavePhase {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    animation: wave-shift 1s linear infinite;
+  }
+  /* Wavy indeterminate: each segment is a full-track window whose clip-path
+     * head/tail sweeps sideways (the two-bar choreography); the sine inside is
+     * pinned to the track's left edge so the wave stays continuous as the
+     * window moves and resizes. */
+  .waveSeg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .waveSegPrimary {
+    animation: wave-seg-primary 2s linear infinite;
+  }
+  .waveSegSecondary {
+    animation: wave-seg-secondary 2s linear infinite;
+  }
+
+  /* Determinate progress transitions (@material/web): linear 250ms MDC
+     * easing; circular stroke 500ms legacy-decelerate. */
+  .linearDeterminate {
+    transition: width 250ms cubic-bezier(0.4, 0, 0.6, 1);
+  }
+  .circularDeterminate {
+    transition: stroke-dashoffset 500ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  /* --- Dialog section stagger (@material/web animations.ts): while the
+     * container reveals, headline/content fade in over 250ms (hidden for
+     * the first 20%) and the actions over 300ms (hidden for the first
+     * 50%); on close every section fades out in 100ms. --- */
+  .animate-dialog-in > * {
+    animation: dialog-part-in 250ms var(--md-sys-motion-easing-linear) both;
+  }
+  .animate-dialog-in > :last-child {
+    animation: dialog-action-in 300ms var(--md-sys-motion-easing-linear) both;
+  }
+  .animate-dialog-out > * {
+    animation: dialog-part-out 100ms var(--md-sys-motion-easing-linear) both;
+  }
+
+  /* --- Selection graphic (@material/web labs segmented): the check/icon
+     * box animates its width (150ms MDC standard) so the whole container
+     * resizes smoothly; the checkmark draws in after a 50ms delay. Shared
+     * by SegmentedButtons and the filter Chips selection checkmark. --- */
+  .segmentedGraphic {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    transition: width 150ms var(--md-sys-motion-easing-legacy);
+  }
+  .segmentedCheck {
+    stroke-dasharray: 1;
+  }
+  .segmentedCheckDraw {
+    animation: segmented-check-draw 150ms var(--md-sys-motion-easing-legacy)
+      50ms both;
+  }
+}
+
+/* Keyframes shared by the component classes above (kept outside @theme so
+ * they always ship with the precompiled CSS). */
+@keyframes focus-ring-grow {
+  from {
+    outline-width: 0;
+  }
+  to {
+    outline-width: 8px;
+  }
+}
+@keyframes focus-ring-shrink {
+  from {
+    outline-width: 8px;
+  }
+  to {
+    outline-width: 3px;
+  }
+}
+/* Circular indeterminate spinner: a continuous spin (1568ms) plus a dash that
+ * grows the arc to ~270° and shrinks it back (1333ms), so it reads as the M3
+ * expanding-arc spinner — now with rounded caps. pathLength=100 makes the dash
+ * values size-independent; the gap (150) always exceeds the path so a single
+ * arc shows. */
+@keyframes circular-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes circular-dash {
+  0% {
+    stroke-dasharray: 1 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 79 150;
+    stroke-dashoffset: -12;
+  }
+  100% {
+    stroke-dasharray: 79 150;
+    stroke-dashoffset: -98;
+  }
+}
+/* M3 Expressive wavy linear progress: the active wave shifts one wavelength
+ * (40px) per second. */
+@keyframes wave-shift {
+  to {
+    transform: translateX(-40px);
+  }
+}
+/* Wavy indeterminate segment windows. The clip-path head/tail (% of track) is
+ * derived from the flat two-bar translate/scale keyframes below (center-origin
+ * scale), so the wavy variant sweeps with the exact same timing as the flat
+ * one. inset(top right bottom left); negative/over-100% values just mean the
+ * window edge sits outside the track and the box clips it. */
+@keyframes wave-seg-primary {
+  0% {
+    clip-path: inset(0 191.167% 0 -99.167%);
+  }
+  20% {
+    clip-path: inset(0 191.167% 0 -99.167%);
+  }
+  25% {
+    clip-path: inset(0 190.194% 0 -98.194%);
+  }
+  30% {
+    clip-path: inset(0 186.953% 0 -94.953%);
+  }
+  35% {
+    clip-path: inset(0 180.887% 0 -88.887%);
+  }
+  36.65% {
+    clip-path: inset(0 178.162% 0 -86.162%);
+  }
+  40% {
+    clip-path: inset(0 169.719% 0 -81.091%);
+  }
+  45% {
+    clip-path: inset(0 152.394% 0 -71.896%);
+  }
+  50% {
+    clip-path: inset(0 130.552% 0 -60.408%);
+  }
+  55% {
+    clip-path: inset(0 106.267% 0 -47.521%);
+  }
+  59.15% {
+    clip-path: inset(0 86.137% 0 -36.854%);
+  }
+  60% {
+    clip-path: inset(0 82.09% 0 -34.671%);
+  }
+  65% {
+    clip-path: inset(0 57.385% 0 -19.602%);
+  }
+  69.15% {
+    clip-path: inset(0 37.842% 0 -3.99%);
+  }
+  70% {
+    clip-path: inset(0 35.626% 0 0.999%);
+  }
+  75% {
+    clip-path: inset(0 22.476% 0 28.677%);
+  }
+  80% {
+    clip-path: inset(0 10.903% 0 52.923%);
+  }
+  85% {
+    clip-path: inset(0 1.975% 0 72.716%);
+  }
+  90% {
+    clip-path: inset(0 -4.079% 0 87.541%);
+  }
+  95% {
+    clip-path: inset(0 -7.613% 0 97.193%);
+  }
+  100% {
+    clip-path: inset(0 -9.444% 0 101.444%);
+  }
+}
+@keyframes wave-seg-secondary {
+  0% {
+    clip-path: inset(0 100.889% 0 -8.889%);
+  }
+  5% {
+    clip-path: inset(0 93.499% 0 -7.813%);
+  }
+  10% {
+    clip-path: inset(0 81.354% 0 -5.434%);
+  }
+  15% {
+    clip-path: inset(0 67.375% 0 -2.839%);
+  }
+  19.15% {
+    clip-path: inset(0 54.976% 0 -0.686%);
+  }
+  20% {
+    clip-path: inset(0 52.836% 0 0.214%);
+  }
+  25% {
+    clip-path: inset(0 39.95% 0 5.476%);
+  }
+  30% {
+    clip-path: inset(0 27.245% 0 11.178%);
+  }
+  35% {
+    clip-path: inset(0 14.938% 0 17.649%);
+  }
+  40% {
+    clip-path: inset(0 3.158% 0 25.344%);
+  }
+  44.15% {
+    clip-path: inset(0 -6.066% 0 33.27%);
+  }
+  45% {
+    clip-path: inset(0 -7.87% 0 35.17%);
+  }
+  48.35% {
+    clip-path: inset(0 -14.447% 0 44.547%);
+  }
+  50% {
+    clip-path: inset(0 -16.722% 0 49.86%);
+  }
+  55% {
+    clip-path: inset(0 -20.394% 0 68.911%);
+  }
+  60% {
+    clip-path: inset(0 -22.703% 0 88.61%);
+  }
+  65% {
+    clip-path: inset(0 -26.618% 0 105.473%);
+  }
+  70% {
+    clip-path: inset(0 -31.852% 0 119.174%);
+  }
+  75% {
+    clip-path: inset(0 -37.519% 0 130.018%);
+  }
+  80% {
+    clip-path: inset(0 -42.98% 0 138.269%);
+  }
+  85% {
+    clip-path: inset(0 -47.91% 0 144.2%);
+  }
+  90% {
+    clip-path: inset(0 -52.234% 0 148.138%);
+  }
+  95% {
+    clip-path: inset(0 -56.019% 0 150.427%);
+  }
+  100% {
+    clip-path: inset(0 -59.389% 0 151.389%);
+  }
+}
+/* Segmented button checkmark draw-in (@material/web labs). */
+@keyframes segmented-check-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+/* Dialog section fades (@material/web animations.ts offsets). */
+@keyframes dialog-part-in {
+  0%,
+  20% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes dialog-action-in {
+  0%,
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes dialog-part-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Standard button group press morph. Unlayered on purpose (same reason as
+ * the connected group below): the padding morph must out-cascade the
+ * buttons' own px-* padding utilities, which live in the utilities layer —
+ * inside @layer components these rules never rendered. */
+.btnGroup > .btn:active:not(:disabled) {
+  padding-inline: calc(var(--group-px) + var(--group-grow));
+}
+.btnGroup > .btn:has(+ .btn:active:not(:disabled)),
+.btnGroup > .btn:active:not(:disabled) + .btn {
+  padding-inline: calc(var(--group-px) - var(--group-grow) / 2);
+}
+
+/* Connected button group (M3E): 2dp gaps; inner corners 8/8/8/16/20 that
+ * sharpen to 4/4/4/12/16 while pressed and round to full when selected
+ * (aria-pressed from toggle buttons); outer corners full (round) or the
+ * per-size square value. No interaction between neighbors. Unlayered on
+ * purpose: the group corner system must out-cascade the children's own
+ * radius utilities (rounded-full + their active: shape morphs), which
+ * live in the utilities layer. :where() keeps every rule at (0,1,0) so
+ * source order resolves states < edges. */
+.btnGroupConnected {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 2px;
+}
+.btnGroupConnected > :where(*) {
+  border-radius: var(--connected-inner);
+}
+.btnGroupConnected > :where(:active:not(:disabled, [aria-pressed="true"])) {
+  border-radius: var(--connected-pressed);
+}
+.btnGroupConnected > :where([aria-pressed="true"]) {
+  /* Real pill px (half height) instead of corner-full: 9999px would
+     * crush the sibling corner on the same edge (CSS overlap scaling)
+     * and snap instead of animating the radius. */
+  border-radius: var(--connected-full);
+}
+.btnGroupConnected > :where(:first-child) {
+  border-start-start-radius: var(--connected-outer);
+  border-end-start-radius: var(--connected-outer);
+}
+.btnGroupConnected > :where(:last-child) {
+  border-start-end-radius: var(--connected-outer);
+  border-end-end-radius: var(--connected-outer);
+}
+.btnGroupConnected.connectedXs,
+.btnGroupConnected.connectedS {
+  --connected-full: 20px;
+  --connected-inner: var(--md-sys-shape-corner-small);
+  --connected-pressed: var(--md-sys-shape-corner-extra-small);
+  --connected-square: var(--md-sys-shape-corner-small);
+}
+/* XS/S connected buttons keep a 48dp minimum width (touch targets). */
+.btnGroupConnected.connectedXs > :where(*),
+.btnGroupConnected.connectedS > :where(*) {
+  min-inline-size: 48px;
+}
+.btnGroupConnected.connectedXs {
+  --connected-full: 16px;
+  --connected-square: var(--md-sys-shape-corner-extra-small);
+}
+.btnGroupConnected.connectedM {
+  --connected-full: 28px;
+  --connected-inner: var(--md-sys-shape-corner-small);
+  --connected-pressed: var(--md-sys-shape-corner-extra-small);
+  --connected-square: var(--md-sys-shape-corner-small);
+}
+.btnGroupConnected.connectedL {
+  --connected-full: 48px;
+  --connected-inner: var(--md-sys-shape-corner-large);
+  --connected-pressed: var(--md-sys-shape-corner-medium);
+  --connected-square: var(--md-sys-shape-corner-large);
+}
+.btnGroupConnected.connectedXl {
+  --connected-full: 68px;
+  --connected-inner: var(--md-sys-shape-corner-large-increased);
+  --connected-pressed: var(--md-sys-shape-corner-large);
+  --connected-square: var(--md-sys-shape-corner-large-increased);
+}
+.btnGroupConnected.connectedRound {
+  --connected-outer: var(--connected-full);
+}
+.btnGroupConnected.connectedSquare {
+  --connected-outer: var(--connected-square);
+}
+
+/* Toolbar ghost-button colors (md.comp.toolbar.standard/vibrant): inside
+ * a toolbar the standard icon buttons and text buttons follow the toolbar
+ * token sets — standard UNSELECTED = on-surface-variant (the "toolbar
+ * standard icon/label color" token: icon buttons already resolve
+ * there, this rule also pulls text buttons off their intrinsic primary),
+ * standard selected = secondary-container tonal look, vibrant content =
+ * on-primary-container with selected = surface-container on on-surface.
+ * (The guidelines prose says "Standard button (Primary)" but the token
+ * table — higher authority — says on-surface-variant; tokens win.)
+ * Unlayered on purpose: must out-cascade the children's own color
+ * utilities (e.g. the icon-button toggle colors and the text button's
+ * primary); :where() keeps specificity at the attribute/pseudo level so
+ * the rules resolve by source order, and :not(:disabled) preserves the
+ * disabled on-surface/38 utilities. */
+.toolbar:not(.vibrant)
+  :where(.iconBtn.standard, .btn.text):not([aria-pressed="true"]):not(
+    :disabled
+  ) {
+  color: var(--md-sys-color-on-surface-variant);
+}
+.toolbar
+  :where(.iconBtn.standard, .btn.text)[aria-pressed="true"]:not(:disabled) {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.toolbar.vibrant :where(.iconBtn.standard, .btn.text):not(:disabled) {
+  color: var(--md-sys-color-on-primary-container);
+}
+.toolbar.vibrant
+  :where(.iconBtn.standard, .btn.text)[aria-pressed="true"]:not(:disabled) {
+  background-color: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
+}
+
+/* FAB menu items reveal by width from the trailing edge (Compose
+ * FloatingActionButtonMenu.kt expands each pill's width 0→100% anchored
+ * End with the fast-spatial spring; a left-inset clip-path is the same
+ * visual for right-aligned pills without per-item wrappers). The three
+ * non-revealing insets stay at -24px: clip-path also clips the
+ * box-shadow (the floatingToolbar halo gotcha) and fill:both keeps the
+ * final state applied, so inset(0) cropped the elevation at rest. The
+ * spring's overshoot pushes the left inset further negative, harmlessly. */
+@keyframes fab-menu-item-rise {
+  from {
+    transform: translateY(12px) scale(0.85);
+  }
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes fab-menu-item-sink {
+  from {
+    transform: translateY(0) scale(1);
+  }
+  to {
+    transform: translateY(12px) scale(0.85);
+  }
+}
+/* Alpha runs on its own quicker track (Compose pairs the width spring
+ * with a fast-effects spring for alpha; approximated as a linear fade). */
+@keyframes fab-menu-item-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fab-menu-item-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Menu items stagger in while the surface reveals. */
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    translate: 0 -6px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* @material/web / MDC linear progress keyframes (2s two-bar cycle). */
+@keyframes linear-primary-translate {
+  0% {
+    transform: translateX(0px);
+  }
+  20% {
+    animation-timing-function: cubic-bezier(0.5, 0, 0.701732, 0.495819);
+    transform: translateX(0px);
+  }
+  59.15% {
+    animation-timing-function: cubic-bezier(0.302435, 0.381352, 0.55, 0.956352);
+    transform: translateX(83.6714%);
+  }
+  100% {
+    transform: translateX(200.611%);
+  }
+}
+@keyframes linear-primary-scale {
+  0% {
+    transform: scaleX(0.08);
+  }
+  36.65% {
+    animation-timing-function: cubic-bezier(0.334731, 0.12482, 0.785844, 1);
+    transform: scaleX(0.08);
+  }
+  69.15% {
+    animation-timing-function: cubic-bezier(0.06, 0.11, 0.6, 1);
+    transform: scaleX(0.661479);
+  }
+  100% {
+    transform: scaleX(0.08);
+  }
+}
+@keyframes linear-secondary-translate {
+  0% {
+    animation-timing-function: cubic-bezier(0.15, 0, 0.515058, 0.409685);
+    transform: translateX(0px);
+  }
+  25% {
+    animation-timing-function: cubic-bezier(0.31033, 0.284058, 0.8, 0.733712);
+    transform: translateX(37.6519%);
+  }
+  48.35% {
+    animation-timing-function: cubic-bezier(0.4, 0.627035, 0.6, 0.902026);
+    transform: translateX(84.3862%);
+  }
+  100% {
+    transform: translateX(160.278%);
+  }
+}
+@keyframes linear-secondary-scale {
+  0% {
+    animation-timing-function: cubic-bezier(
+      0.205028,
+      0.057051,
+      0.57661,
+      0.453971
+    );
+    transform: scaleX(0.08);
+  }
+  19.15% {
+    animation-timing-function: cubic-bezier(
+      0.152313,
+      0.196432,
+      0.648374,
+      1.00432
+    );
+    transform: scaleX(0.457104);
+  }
+  44.15% {
+    animation-timing-function: cubic-bezier(
+      0.257759,
+      -0.003163,
+      0.211762,
+      1.38179
+    );
+    transform: scaleX(0.72796);
+  }
+  100% {
+    transform: scaleX(0.08);
+  }
+}
+/* Reduced motion: stop the DECORATIVE infinite loops (the spin-lazy story/
+ * avatar ring and the blob morph) when the user prefers reduced motion.
+ * Progress/Loading spinners are ESSENTIAL motion (WCAG 2.2.2 exempt) and are
+ * intentionally NOT gated. Unlayered so it overrides the Tailwind utilities. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-lazy,
+  .animate-blob {
+    animation: none;
+  }
+}
