@@ -1,8 +1,8 @@
 # react-material-expressive
 
-[![npm version](https://img.shields.io/npm/v/react-material-expressive.svg)](https://www.npmjs.com/package/react-material-expressive)
+[![npm version](https://img.shields.io/npm/v/react-material-expressive)](https://www.npmjs.com/package/react-material-expressive)
 [![CI](https://github.com/gersilva96/react-material-expressive/actions/workflows/ci.yml/badge.svg)](https://github.com/gersilva96/react-material-expressive/actions/workflows/ci.yml)
-[![license: MIT](https://img.shields.io/npm/l/react-material-expressive.svg)](LICENSE)
+[![license: MIT](https://img.shields.io/npm/l/react-material-expressive)](LICENSE)
 
 React component system implementing **Material 3 Expressive**: official M3
 design tokens, state layers, the full type/shape/elevation scales and
