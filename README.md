@@ -10,11 +10,16 @@ motion — framework-agnostic (no `next/*`), RSC/SSR friendly, with
 **precompiled CSS** (you don't set up Tailwind) and runtime theming via CSS
 variables.
 
+> **🤖 LLM- and agent-friendly.** Start from the machine-readable index
+> [`llms.txt`](https://github.com/gersilva96/react-material-expressive/blob/main/llms.txt)
+> — every component linked with a one-line description. It's also resolvable as
+> `react-material-expressive/llms.txt` and pointed to by the `llmsTxt` field in
+> `package.json`.
+
 - React `>= 19` (peer dependency). ESM + CJS + TypeScript types.
 - Pure UI kit: presentational, controllable components. No business logic,
   no data fetching, no app state.
-- Machine-readable docs per component in [`docs/components/`](https://github.com/gersilva96/react-material-expressive/tree/main/docs/components)
-  and an LLM index in [`llms.txt`](https://github.com/gersilva96/react-material-expressive/blob/main/llms.txt).
+- Machine-readable docs per component in [`docs/components/`](https://github.com/gersilva96/react-material-expressive/tree/main/docs/components).
 - **Live demo**: [react-material-expressive.vercel.app](https://react-material-expressive.vercel.app)
   (the Storybook, redeployed on every push).
 

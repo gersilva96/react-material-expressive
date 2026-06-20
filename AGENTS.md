@@ -34,8 +34,9 @@ src/
 ```
 
 Single root export (one tsup entry): `.` (all components, elements and
-layers), plus the precompiled `./styles.css` and the raw `./theme.css`
-Tailwind v4 partial. The JS API is components + elements + layers only
+layers), plus the precompiled `./styles.css`, the raw `./theme.css`
+Tailwind v4 partial, and `./llms.txt` (the LLM index, also pointed to by the
+`llmsTxt` field in `package.json`). The JS API is components + elements + layers only
 (`utils/` stays internal); theming is CSS token overrides + the
 `ToggleTheme`/`ToggleThemeMenu` components, and `theme.css` lets a consumer
 extend the design with M3 utilities in their own Tailwind v4 (token values

@@ -4,6 +4,7 @@
   "description": "Material 3 Expressive React component library. Framework-agnostic, precompiled CSS, official M3 design tokens.",
   "author": "Ger Silva",
   "homepage": "https://github.com/gersilva96/react-material-expressive#readme",
+  "llmsTxt": "./llms.txt",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gersilva96/react-material-expressive.git"
@@ -46,6 +47,7 @@
     },
     "./styles.css": "./dist/styles.css",
     "./theme.css": "./dist/theme.css",
+    "./llms.txt": "./llms.txt",
     "./package.json": "./package.json"
   },
   "scripts": {
