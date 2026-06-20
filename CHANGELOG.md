@@ -10,6 +10,8 @@ what to adjust when upgrading.
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-06-20
+
 ### Added
 
 - **`ComboboxOutlined` / `ComboboxFilled`** — an ARIA combobox (text field +
@@ -85,5 +87,6 @@ baseline).
 - React 19+, **ESM + CJS** builds and **TypeScript** types, plus
   machine-readable per-component docs and an LLM index.
 
-[Unreleased]: https://github.com/gersilva96/react-material-expressive/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/gersilva96/react-material-expressive/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/gersilva96/react-material-expressive/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/gersilva96/react-material-expressive/releases/tag/v1.0.0
