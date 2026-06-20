@@ -12,8 +12,23 @@ describe("Combobox a11y", () => {
   it("renders an ARIA combobox input, collapsed", () => {
     render(<ComboboxOutlined label="Fruit" options={options} />);
     const combobox = screen.getByRole("combobox");
-    expect(combobox).toHaveAttribute("aria-autocomplete", "list");
+    // No onInputChange wired → a static option popover, not list-autocomplete.
+    expect(combobox).toHaveAttribute("aria-autocomplete", "none");
     expect(combobox).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("advertises list autocomplete only when onInputChange is wired", () => {
+    render(
+      <ComboboxOutlined
+        label="Fruit"
+        onInputChange={() => {}}
+        options={options}
+      />,
+    );
+    expect(screen.getByRole("combobox")).toHaveAttribute(
+      "aria-autocomplete",
+      "list",
+    );
   });
 
   it("links supporting text and error via aria-describedby / aria-invalid", () => {
