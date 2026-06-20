@@ -33,6 +33,10 @@ what to adjust when upgrading.
   props set each rendered element (defaults preserved: div/p/h2/p) so the
   heading level follows content hierarchy (M3 a11y). With a single slot the
   text element now renders directly, without the wrapper `<div>`.
+- **`llms.txt` discoverability** — exposed as the
+  `react-material-expressive/llms.txt` export subpath and pointed to by an
+  `llmsTxt` field in `package.json`, plus a prominent pointer at the top of the
+  README.
 
 ### Changed
 
