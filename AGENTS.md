@@ -130,9 +130,9 @@ public`).
 ### Cutting a release
 
 Branching is **GitHub Flow**: `main` is always publishable and is the only
-long-lived branch. Each change lands on a short branch off `main` (`fix/…`,
-`feat/…`) via PR with CI green; there is **no `develop` and no release/collector
-branch**. `main` is public — **never force-push it** (the pre-1.0.0
+long-lived branch. Each change lands on a short branch off `main`
+(`feature/…`, `fix/…`, `hotfix/…`, `enhancement/…`) via PR with CI green; there
+is **no `develop` and no release/collector branch**. `main` is public — **never force-push it** (the pre-1.0.0
 amend-and-force-push flow is retired). Releases are cut by tagging `main`.
 
 Pick the version by **strict SemVer**: bug fixes only → PATCH (`1.0.1`);
