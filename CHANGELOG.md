@@ -17,6 +17,14 @@ what to adjust when upgrading.
   consumer-overridable z-index scale instead of scattered hard-coded values.
   See FOUNDATIONS.md → Stacking & z-index.
 
+### Fixed
+
+- **Top-level menus no longer clip inside `overflow` ancestors** — `Dropdown`,
+  `OverflowMenu` and `SplitButton` now render their menu in a portal on
+  `document.body` with fixed positioning (like `Menu.Sub` already did),
+  auto-flipping above the trigger when there's no room below and tracking it
+  on scroll/resize. Positioning is unified in a shared internal helper.
+
 ## [1.0.0] - 2026-06-17
 
 Initial public release — the first complete implementation of **Material 3

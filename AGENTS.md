@@ -25,6 +25,7 @@ src/
 ├── components/<folder>/      # one folder per component; sub-parts co-located
 │   ├── _useDismissable.ts    # internal: overlays with exit animation
 │   ├── _useOutsideClose.ts   # internal: close on outside click
+│   ├── _usePopoverPosition.ts # internal: portaled popover placement (flip/shift)
 │   └── _useFocusTrap.ts      # internal: modal focus-in/restore + Tab trap
 ├── elements/common/          # primitives (Amount, Checkbox, Switch, Img…)
 │   └── _media.tsx            # internal: media-injection contract + native <img>

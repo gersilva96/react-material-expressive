@@ -8,9 +8,11 @@ import {
   useRef,
   useState,
 } from "react";
+import {createPortal} from "react-dom";
 import {cn} from "../../utils/helpers";
 import {useDismissable} from "../_useDismissable";
 import {useOutsideClose} from "../_useOutsideClose";
+import {usePopoverPosition} from "../_usePopoverPosition";
 import {Menu} from "../menu/Menu";
 import {MenuItem} from "../menu/MenuItem";
 
@@ -48,9 +50,17 @@ function Dropdown({
   const [open, setOpen] = useState(false);
   const wrapper = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLDivElement>(null);
+  const floating = useRef<HTMLDivElement>(null);
   const wasOpen = useRef(false);
   const menuId = useId();
   const {exiting, mounted} = useDismissable(open, 150);
+  // Portaled + fixed-positioned so the menu escapes any `overflow` ancestor
+  // (e.g. a Table body). Anchored to the wrapper (the trigger box) since the
+  // inner trigger node is `display: contents` and has no box of its own.
+  const pos = usePopoverPosition(wrapper, floating, mounted, {
+    gap: apart ? 4 : 0,
+    placement: "bottom-start",
+  });
 
   useOutsideClose(wrapper, () => setOpen(false), open);
 
@@ -89,18 +99,25 @@ function Dropdown({
         ref={trigger}>
         {triggerNode}
       </div>
-      {mounted ? (
-        <div className="absolute top-full left-0 z-30 flex w-full flex-col">
-          <Menu
-            className={cn(apart && "mt-1", menuClassName)}
-            exiting={exiting}
-            id={menuId}
-            onClose={() => setOpen(false)}
-            vibrant={vibrant}>
-            {menu}
-          </Menu>
-        </div>
-      ) : null}
+      {mounted && typeof document !== "undefined"
+        ? createPortal(
+            <div
+              className="fixed z-[var(--md-sys-z-menu)]"
+              ref={floating}
+              style={{left: pos.left, top: pos.top}}>
+              <Menu
+                className={menuClassName}
+                exiting={exiting}
+                id={menuId}
+                onClose={() => setOpen(false)}
+                up={pos.flippedVertically}
+                vibrant={vibrant}>
+                {menu}
+              </Menu>
+            </div>,
+            document.body,
+          )
+        : null}
     </div>
   );
 }

@@ -8,9 +8,9 @@ import {
 import {createPortal} from "react-dom";
 import {cn} from "../../utils/helpers";
 import {useRipple} from "../../utils/_ripple";
+import {usePopoverPosition} from "../_usePopoverPosition";
 import {MenuContext} from "./_context";
 import {Menu} from "./Menu";
-import {useSubmenuPosition} from "./_useSubmenu";
 
 export interface MenuSubProps {
   /** Submenu content (Menu.Item / Menu.Divider / nested Menu.Sub). */
@@ -61,7 +61,9 @@ function MenuSub({
   const trigger = useRef<HTMLButtonElement>(null);
   const floating = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const pos = useSubmenuPosition(trigger, floating, open);
+  const pos = usePopoverPosition(trigger, floating, open, {
+    placement: "right-start",
+  });
 
   const clear = () => timer.current && clearTimeout(timer.current);
   const hoverOpen = () => {

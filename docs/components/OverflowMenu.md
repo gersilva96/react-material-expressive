@@ -61,5 +61,9 @@ interface OverflowMenuItemProps {
 
 ## Gotchas
 
-- Position flags are booleans; with none set it falls back to bottomRight.
+- Position flags are booleans expressing a **preferred** placement; with none
+  set it falls back to bottomRight. The menu renders in a portal on
+  `document.body` (fixed-positioned), so it escapes `overflow` ancestors, and
+  flips to the opposite side / shifts to stay in the viewport when the
+  preferred placement doesn't fit; it tracks the trigger on scroll/resize.
 - Closes on outside click, item click and Escape.

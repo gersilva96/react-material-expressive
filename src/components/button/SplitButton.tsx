@@ -1,9 +1,11 @@
 import {MouseEventHandler, ReactNode, useEffect, useRef, useState} from "react";
+import {createPortal} from "react-dom";
 import {Icon} from "../../elements/common/Icon";
 import {cn} from "../../utils/helpers";
 import {useRipple} from "../../utils/_ripple";
 import {useDismissable} from "../_useDismissable";
 import {useOutsideClose} from "../_useOutsideClose";
+import {usePopoverPosition} from "../_usePopoverPosition";
 import {Menu} from "../menu/Menu";
 import {MenuItem} from "../menu/MenuItem";
 import type {ButtonSize} from "./Button";
@@ -159,8 +161,15 @@ function SplitButton({
   const [isOpen, setIsOpen] = useState(false);
   const wrapper = useRef<HTMLDivElement>(null);
   const trailing = useRef<HTMLButtonElement>(null);
+  const floating = useRef<HTMLDivElement>(null);
   const wasOpen = useRef(false);
   const {exiting, mounted} = useDismissable(isOpen, 150);
+  // Portaled + fixed so the menu escapes any `overflow` ancestor; anchored to
+  // the wrapper box and aligned to its right (trailing-button) edge.
+  const pos = usePopoverPosition(wrapper, floating, mounted, {
+    gap: 8,
+    placement: "bottom-end",
+  });
   const config = SIZES[size];
   // A disabled split button gives no interactive feedback, so drop the
   // inner-corner hover/focus/press morphs — a disabled <button> still
@@ -236,16 +245,23 @@ function SplitButton({
           <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
         </svg>
       </button>
-      {mounted ? (
-        <div className="absolute top-full right-0 z-20 flex flex-col">
-          <Menu
-            className={cn("mt-2", menuClassName)}
-            exiting={exiting}
-            onClose={() => setIsOpen(false)}>
-            {menu}
-          </Menu>
-        </div>
-      ) : null}
+      {mounted && typeof document !== "undefined"
+        ? createPortal(
+            <div
+              className="fixed z-[var(--md-sys-z-menu)]"
+              ref={floating}
+              style={{left: pos.left, top: pos.top}}>
+              <Menu
+                className={menuClassName}
+                exiting={exiting}
+                onClose={() => setIsOpen(false)}
+                up={pos.flippedVertically}>
+                {menu}
+              </Menu>
+            </div>,
+            document.body,
+          )
+        : null}
     </div>
   );
 }

@@ -145,5 +145,9 @@ Grouped with a gap (separate surfaces):
 
 - Anchorless: wrap it in a positioned element and control mount/unmount
   (e.g. via `useDismissable`) yourself, or use `Dropdown` which does this.
+  The built-in anchored menus (`Dropdown`, `OverflowMenu`, `SplitButton`) and
+  `Menu.Sub` all render in a portal on `document.body`, placed by the shared
+  internal `usePopoverPosition` helper (fixed positioning with viewport
+  flip/shift), so they escape `overflow` ancestors.
 - `selected` is visual; for single-selection semantics in a picker, the
   consumer still owns the selected value.

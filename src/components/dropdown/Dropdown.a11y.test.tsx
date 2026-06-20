@@ -47,4 +47,18 @@ describe("Dropdown", () => {
     );
     expect(await axe(container)).toHaveNoViolations();
   });
+
+  it("portals the menu so it escapes an overflow ancestor", () => {
+    render(
+      <div data-testid="clip" style={{overflow: "hidden"}}>
+        <Dropdown menu={<Dropdown.Item>One</Dropdown.Item>}>
+          <button type="button">Open</button>
+        </Dropdown>
+      </div>,
+    );
+    fireEvent.click(screen.getByRole("button", {name: "Open"}));
+    const menu = screen.getByRole("menu");
+    // Rendered in a portal on <body>, not inside the clipping container.
+    expect(screen.getByTestId("clip")).not.toContainElement(menu);
+  });
 });
