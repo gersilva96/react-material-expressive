@@ -101,7 +101,7 @@ function ComboboxFilled({
                 ? `${autoId}-opt-${highlighted}`
                 : undefined
             }
-            aria-autocomplete="list"
+            aria-autocomplete={onInputChange ? "list" : "none"}
             aria-controls={
               mounted && hasOptions ? `${autoId}-listbox` : undefined
             }

@@ -4,14 +4,21 @@ ARIA **combobox** with an async-friendly options list — a text field
 (`ComboboxFilled` / `ComboboxOutlined`, same anatomy as the text fields and
 `Select`) over a `role="listbox"` popover. Unlike `Select` (a fixed option
 list) and `Search` (a search bar, not a combobox), it exposes the full
-combobox semantics — `role="combobox"`, `aria-autocomplete="list"`,
+combobox semantics — `role="combobox"`, `aria-autocomplete`,
 `aria-expanded`/`aria-controls`/`aria-activedescendant` — with keyboard
 navigation and a portaled listbox that escapes `overflow` ancestors.
 
 **The library never fetches or filters.** You own the data: as the user types,
-`onInputChange(query)` fires (debounce it on your side), you fetch/filter, and
-feed the already-filtered `options` back in. `loading` shows a status row while
-in flight. (Not a Material component — an extra on top of the M3 kit.)
+`onInputChange(query)` fires (debounce it on your side), you fetch/filter
+(client- or server-side) and feed the resulting `options` back in. `loading`
+shows a status row while in flight. (Not a Material component — an extra on top
+of the M3 kit.)
+
+Because filtering only happens through `onInputChange`, `aria-autocomplete` is
+`"list"` when you wire `onInputChange` (the list narrows as the user types) and
+`"none"` when you don't (a static option popover that never narrows). Wire
+`onInputChange` for a real combobox — even a static list needs a (synchronous)
+filter to narrow.
 
 ## Import
 
