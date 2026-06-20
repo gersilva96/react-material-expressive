@@ -1386,7 +1386,7 @@
      * (items gap 4↔0, item min-height 64↔content) TRANSITIONS — the
      * official collapse relaxes the pitch gradually, it never snaps. */
   .railHeader {
-    @apply mb-10 flex w-full flex-col items-start gap-1 px-5;
+    @apply mb-10 flex w-full shrink-0 flex-col items-start gap-1 px-5;
   }
   .railSlot {
     @apply flex w-14 flex-col items-center;
@@ -1395,7 +1395,10 @@
      * fits) so the item width follows the animating rail width
      * continuously. */
   .railItems {
-    @apply flex w-full flex-col items-start overflow-x-hidden overflow-y-auto px-5;
+    /* The sole flexible region (flex-1 + min-h-0), so it scrolls ONLY when the
+     * destinations actually overflow — not whenever the rail is a little short
+     * (the header/bottom are shrink-0 and keep their natural size). */
+    @apply flex w-full min-h-0 flex-1 flex-col items-start overflow-x-hidden overflow-y-auto px-5;
     gap: 4px;
     transition: gap 450ms var(--md-sys-motion-spring-default-spatial);
   }
@@ -1406,7 +1409,7 @@
     gap: 0px;
   }
   .railBottom {
-    @apply mt-auto flex w-full flex-col items-start gap-1 px-5 pb-11;
+    @apply mt-auto flex w-full shrink-0 flex-col items-start gap-1 px-5 pb-11;
   }
   /* Rail item: a column with the row pill on top and the below-label
      * underneath. The pill hugs its content in BOTH states (Compose
