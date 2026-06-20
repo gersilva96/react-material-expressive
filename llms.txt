@@ -51,6 +51,7 @@
 - [Slider and SliderDual](docs/components/Slider.md)
 - [TextField (InputOutlined/InputFilled/TextFieldOutlined/TextFieldFilled)](docs/components/TextField.md)
 - [Select (SelectFilled/SelectOutlined)](docs/components/Select.md)
+- [Combobox (ComboboxFilled/ComboboxOutlined)](docs/components/Combobox.md)
 - [Amount](docs/components/Amount.md)
 - [DatePicker (+Docked) and DateRangePicker](docs/components/DatePicker.md)
 - [TimePicker (dial + input)](docs/components/TimePicker.md)

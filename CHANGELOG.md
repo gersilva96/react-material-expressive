@@ -12,6 +12,11 @@ what to adjust when upgrading.
 
 ### Added
 
+- **`ComboboxOutlined` / `ComboboxFilled`** — an ARIA combobox (text field +
+  portaled `role="listbox"`) with consumer-controlled async options: type to
+  fire `onInputChange`, feed back already-filtered `options`, with `loading`,
+  `clearable`, error states and full keyboard. Closes the gap that forced
+  integrators to use `Search` as a combobox substitute.
 - **Documented `--md-sys-z-*` stacking tokens** — every overlay (menus,
   tooltips, dialogs/sheets, snackbar) now layers through one ascending,
   consumer-overridable z-index scale instead of scattered hard-coded values.
