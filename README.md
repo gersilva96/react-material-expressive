@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/react-material-expressive)](https://www.npmjs.com/package/react-material-expressive)
 [![CI](https://github.com/gersilva96/react-material-expressive/actions/workflows/ci.yml/badge.svg)](https://github.com/gersilva96/react-material-expressive/actions/workflows/ci.yml)
-[![license: MIT](https://img.shields.io/npm/l/react-material-expressive)](LICENSE)
+[![license: MIT](https://img.shields.io/npm/l/react-material-expressive)](https://github.com/gersilva96/react-material-expressive/blob/main/LICENSE)
 
 React component system implementing **Material 3 Expressive**: official M3
 design tokens, state layers, the full type/shape/elevation scales and
@@ -13,9 +13,9 @@ variables.
 - React `>= 19` (peer dependency). ESM + CJS + TypeScript types.
 - Pure UI kit: presentational, controllable components. No business logic,
   no data fetching, no app state.
-- Machine-readable docs per component in [`docs/components/`](docs/components)
-  and an LLM index in [`llms.txt`](llms.txt).
-- **Live demo**: [ger-material-expressive.vercel.app](https://ger-material-expressive.vercel.app)
+- Machine-readable docs per component in [`docs/components/`](https://github.com/gersilva96/react-material-expressive/tree/main/docs/components)
+  and an LLM index in [`llms.txt`](https://github.com/gersilva96/react-material-expressive/blob/main/llms.txt).
+- **Live demo**: [react-material-expressive.vercel.app](https://react-material-expressive.vercel.app)
   (the Storybook, redeployed on every push).
 
 ## Installation
@@ -231,23 +231,23 @@ The theme-name strings of `ToggleThemeMenu` stay in its `themes` list (an
 
 | Family            | Docs                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Buttons           | [Button](docs/components/Button.md) · [ButtonGroup](docs/components/ButtonGroup.md) · [ButtonGroupConnected](docs/components/ButtonGroupConnected.md) · [IconButton](docs/components/IconButton.md) · [FAB / ExtendedFAB](docs/components/FAB.md) · [FABMenu](docs/components/FABMenu.md) · [SplitButton](docs/components/SplitButton.md)                                                                                    |
-| Communication     | [Badge](docs/components/Badge.md) · [Progress / Circle](docs/components/Progress.md) · [LoadingIndicator](docs/components/LoadingIndicator.md) · [Snackbar](docs/components/Snackbar.md) · [Tooltip](docs/components/Tooltip.md) · [Loading](docs/components/Loading.md)                                                                                                                                                     |
-| Containment       | [Card](docs/components/Card.md) · [Dialog](docs/components/Dialog.md) · [Sheets](docs/components/Sheets.md) · [Divider](docs/components/Divider.md) · [List](docs/components/List.md) · [Table](docs/components/Table.md)                                                                                                                                                                                                    |
-| Selection & input | [Checkbox](docs/components/Checkbox.md) · [Radio](docs/components/Radio.md) · [Switch](docs/components/Switch.md) · [Chips](docs/components/Chips.md) · [Slider / SliderDual](docs/components/Slider.md) · [TextField](docs/components/TextField.md) · [Select](docs/components/Select.md) · [Combobox](docs/components/Combobox.md) · [Amount](docs/components/Amount.md) · [DatePicker](docs/components/DatePicker.md) · [TimePicker](docs/components/TimePicker.md) |
-| Navigation        | [NavigationBar](docs/components/NavigationBar.md) · [NavigationRail](docs/components/NavigationRail.md) · [TopAppBar](docs/components/TopAppBar.md) · [Toolbars](docs/components/Toolbar.md) · [Tabs](docs/components/Tabs.md) · [Link](docs/components/Link.md) · [Search](docs/components/Search.md)                                                                                                                       |
-| Menus             | [Menu](docs/components/Menu.md) · [Dropdown](docs/components/Dropdown.md) · [OverflowMenu](docs/components/OverflowMenu.md) · [ToggleTheme](docs/components/ToggleTheme.md)                                                                                                                                                                                                                                                  |
-| Media & showcase  | [Avatar](docs/components/Avatar.md) · [AvatarStack](docs/components/AvatarStack.md) · [Img](docs/components/Img.md) · [MediaFrame](docs/components/MediaFrame.md) · [Gallery](docs/components/Gallery.md) · [Stories](docs/components/Stories.md) · [Video](docs/components/Video.md) · [Perspective](docs/components/Perspective.md) · [Blob](docs/components/Blob.md)                                                      |
-| Text & icons      | [TextElement](docs/components/TextElement.md) · [Icon](docs/components/Icon.md) · [MaterialSymbol](docs/components/MaterialSymbol.md)                                                                                                                                                                                                                                                                                        |
-| Layout            | [Layers](docs/components/Layers.md)                                                                                                                                                                                                                                                                                                                                                                                          |
+| Buttons           | [Button](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Button.md) · [ButtonGroup](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/ButtonGroup.md) · [ButtonGroupConnected](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/ButtonGroupConnected.md) · [IconButton](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/IconButton.md) · [FAB / ExtendedFAB](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/FAB.md) · [FABMenu](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/FABMenu.md) · [SplitButton](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/SplitButton.md)                                                                                    |
+| Communication     | [Badge](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Badge.md) · [Progress / Circle](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Progress.md) · [LoadingIndicator](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/LoadingIndicator.md) · [Snackbar](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Snackbar.md) · [Tooltip](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Tooltip.md) · [Loading](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Loading.md)                                                                                                                                                     |
+| Containment       | [Card](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Card.md) · [Dialog](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Dialog.md) · [Sheets](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Sheets.md) · [Divider](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Divider.md) · [List](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/List.md) · [Table](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Table.md)                                                                                                                                                                                                    |
+| Selection & input | [Checkbox](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Checkbox.md) · [Radio](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Radio.md) · [Switch](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Switch.md) · [Chips](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Chips.md) · [Slider / SliderDual](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Slider.md) · [TextField](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/TextField.md) · [Select](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Select.md) · [Combobox](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Combobox.md) · [Amount](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Amount.md) · [DatePicker](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/DatePicker.md) · [TimePicker](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/TimePicker.md) |
+| Navigation        | [NavigationBar](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/NavigationBar.md) · [NavigationRail](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/NavigationRail.md) · [TopAppBar](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/TopAppBar.md) · [Toolbars](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Toolbar.md) · [Tabs](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Tabs.md) · [Link](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Link.md) · [Search](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Search.md)                                                                                                                       |
+| Menus             | [Menu](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Menu.md) · [Dropdown](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Dropdown.md) · [OverflowMenu](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/OverflowMenu.md) · [ToggleTheme](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/ToggleTheme.md)                                                                                                                                                                                                                                                  |
+| Media & showcase  | [Avatar](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Avatar.md) · [AvatarStack](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/AvatarStack.md) · [Img](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Img.md) · [MediaFrame](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/MediaFrame.md) · [Gallery](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Gallery.md) · [Stories](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Stories.md) · [Video](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Video.md) · [Perspective](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Perspective.md) · [Blob](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Blob.md)                                                      |
+| Text & icons      | [TextElement](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/TextElement.md) · [Icon](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Icon.md) · [MaterialSymbol](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/MaterialSymbol.md)                                                                                                                                                                                                                                                                                        |
+| Layout            | [Layers](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Layers.md)                                                                                                                                                                                                                                                                                                                                                                                          |
 
 ### Expressive-only
 
 This kit is **Material 3 Expressive only**. Components and variants that the
 M3 Expressive spec marks "no longer recommended" are not shipped: the
-NavigationDrawer (→ expanded [NavigationRail](docs/components/NavigationRail.md)),
-BottomAppBar (→ [DockedToolbar](docs/components/Toolbar.md)) and SegmentedButtons
-(→ [ButtonGroupConnected](docs/components/ButtonGroupConnected.md) with toggles)
+NavigationDrawer (→ expanded [NavigationRail](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/NavigationRail.md)),
+BottomAppBar (→ [DockedToolbar](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Toolbar.md)) and SegmentedButtons
+(→ [ButtonGroupConnected](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/ButtonGroupConnected.md) with toggles)
 components were removed, as were the FAB `surface` color / small (40dp) size,
 the Slider `classic` prop, the TopAppBar `Medium`/`Large` `baseline` prop and
 the NavigationBar `tall` height. The expressive default is the only path.
@@ -257,15 +257,15 @@ default and the alternative stays available:
 
 | Component                                        | Default (recommended)          | Still-available alternative |
 | ------------------------------------------------ | ------------------------------ | --------------------------- |
-| [List](docs/components/List.md)                  | `variant="expressive"` (tiles) | `variant="plain"`           |
-| [Search](docs/components/Search.md)              | contained (gapped card)        | `divided` prop              |
-| [Progress / Circle](docs/components/Progress.md) | flat indicator                 | `wavy` prop                 |
+| [List](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/List.md)                  | `variant="expressive"` (tiles) | `variant="plain"`           |
+| [Search](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Search.md)              | contained (gapped card)        | `divided` prop              |
+| [Progress / Circle](https://github.com/gersilva96/react-material-expressive/blob/main/docs/components/Progress.md) | flat indicator                 | `wavy` prop                 |
 
 ## Versioning
 
 This project follows [Semantic Versioning](https://semver.org/): breaking
 changes bump the _major_ version, new features the _minor_, and fixes the
-_patch_. See the [CHANGELOG](CHANGELOG.md) for every release, with a
+_patch_. See the [CHANGELOG](https://github.com/gersilva96/react-material-expressive/blob/main/CHANGELOG.md) for every release, with a
 **migration note** on each breaking change so you know exactly what to adjust
 when upgrading.
 
@@ -277,8 +277,8 @@ npm run build            # dist/: css + esm + cjs + dts + themes
 npm run typecheck && npm run lint && npm test
 ```
 
-See [AGENTS.md](AGENTS.md) for architecture and conventions, and
-[CONTRIBUTING.md](CONTRIBUTING.md) for how to contribute. The interactive
+See [AGENTS.md](https://github.com/gersilva96/react-material-expressive/blob/main/AGENTS.md) for architecture and conventions, and
+[CONTRIBUTING.md](https://github.com/gersilva96/react-material-expressive/blob/main/CONTRIBUTING.md) for how to contribute. The interactive
 component workbench (Storybook) lives in a separate repository.
 
 ## License
