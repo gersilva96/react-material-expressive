@@ -186,6 +186,26 @@
   --md-sys-state-focus-state-layer-opacity: 0.12;
   --md-sys-state-pressed-state-layer-opacity: 0.12;
   --md-sys-state-dragged-state-layer-opacity: 0.16;
+
+  /* Overlay stacking scale (library-internal; theme-independent, so it lives
+   * in :root only and is NOT duplicated in the dark scheme). One documented
+   * order for every overlay keeps layering predictable; consumers can override
+   * any token to slot their own chrome between layers. Consumed via Tailwind
+   * arbitrary values, e.g. `z-[var(--md-sys-z-menu)]`. */
+  --md-sys-z-base: 0; /* default content plane */
+  --md-sys-z-raised: 10; /* in-flow raised bits (FAB-in-toolbar, indicators) */
+  --md-sys-z-sticky: 20; /* sticky/stacked in-flow chrome (avatar overlaps) */
+  --md-sys-z-dropdown: 30; /* anchored inline popovers (Select/Search/docked pickers) */
+  --md-sys-z-menu: 50; /* portaled menus & popovers (Dropdown/OverflowMenu/SplitButton/Menu.Sub/Combobox) */
+  --md-sys-z-tooltip: 55; /* tooltips ride just above menus */
+  --md-sys-z-modal: 60; /* dialogs, sheets, modal rail + their scrims */
+  --md-sys-z-snackbar: 70; /* toasts above everything */
+
+  /* Local negative layers inside isolated state-layer / nav hosts. These never
+   * interact with the overlay scale above — kept separate to avoid confusion. */
+  --md-sys-z-state-press: -1;
+  --md-sys-z-state-hover: -2;
+  --md-sys-z-nav-indicator: -3;
 }
 
 /* M3 design tokens — dark scheme (same Theme Builder export) */
@@ -553,7 +573,7 @@
     pointer-events: none;
     position: absolute;
     inset: 0;
-    z-index: -2;
+    z-index: var(--md-sys-z-state-hover);
     border-radius: inherit;
     background-color: transparent;
     transition: background-color 15ms var(--md-sys-motion-easing-linear);
@@ -597,7 +617,7 @@
     pointer-events: none;
     position: absolute;
     inset: 0;
-    z-index: -1;
+    z-index: var(--md-sys-z-state-press);
     border-radius: inherit;
     opacity: 0;
     background-image: radial-gradient(
@@ -1140,7 +1160,8 @@
      * the toolbar collapses (icon 24 → 28 via scale); elevation level 2,
      * hover 3 (Compose toolbar FAB, not the standalone 3→4). */
   .floatingFab {
-    @apply absolute z-10 flex size-14 items-center justify-center;
+    @apply absolute flex size-14 items-center justify-center;
+    z-index: var(--md-sys-z-raised);
     transition:
       width 350ms var(--md-sys-motion-spring-fast-spatial),
       height 350ms var(--md-sys-motion-spring-fast-spatial);
@@ -1194,7 +1215,7 @@
     left: 50%;
     translate: -50%;
     width: var(--nav-ind-rest, 32px);
-    z-index: -3;
+    z-index: var(--md-sys-z-nav-indicator);
     border-radius: inherit;
     background-color: var(--md-sys-color-secondary-container);
     opacity: 0;
@@ -1539,7 +1560,8 @@
      *    constant-surface + late-unmount model, which reads as a 1-frame pop on
      *    the 96px rail when expressed in a single morphing element. */
   .railModal {
-    @apply absolute top-0 left-0 z-50 h-full;
+    @apply absolute top-0 left-0 h-full;
+    z-index: var(--md-sys-z-modal);
     transition:
       width 350ms var(--md-sys-motion-spring-fast-spatial),
       background-color 250ms var(--md-sys-motion-easing-emphasized),

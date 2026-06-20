@@ -47,7 +47,7 @@ function Search({
   return (
     <div
       className={cn(
-        "relative z-30 flex h-fit w-full min-w-[360px] max-w-[720px] cursor-pointer bg-surface-container-high text-on-surface",
+        "relative z-[var(--md-sys-z-dropdown)] flex h-fit w-full min-w-[360px] max-w-[720px] cursor-pointer bg-surface-container-high text-on-surface",
         // Contained (M3 Expressive): the bar stays a persistent 28px
         // pill (real px — corner-full would snap instead of morphing).
         // Divided (baseline): its bottom corners square off in step

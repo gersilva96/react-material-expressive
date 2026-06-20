@@ -41,3 +41,6 @@ interface SectionProps {
 
 - The dot grid uses `--md-sys-color-outline-variant`, so it adapts to the
   active theme.
+- Overlay stacking follows the documented `--md-sys-z-*` scale (see
+  FOUNDATIONS.md → Stacking & z-index). Override a token to slot your own
+  chrome between layers (e.g. a sticky header below menus).

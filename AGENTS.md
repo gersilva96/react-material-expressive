@@ -59,6 +59,12 @@ still come from `styles.css`).
   field's placeholder/value over the leading icon). Pick the value per side
   instead: `leftElement ? "pl-13" : "pl-4"`. Two same-side longhands
   (`pl-4` + `pl-12`) are fine — `cn`/tailwind-merge collapses them to one.
+- **Overlay z-index via tokens**: every overlay layer goes through the
+  `--md-sys-z-*` scale as a full literal (`z-[var(--md-sys-z-menu)]`), never a
+  hard-coded `z-40`/`z-index`. The scale (base→raised→sticky→dropdown→menu→
+  tooltip→modal→snackbar) is defined in `styles.css` `:root` and documented in
+  FOUNDATIONS.md → Stacking & z-index. Intra-component stacking (sliders,
+  avatars, the icon-over-fill) stays a local literal — only overlays tokenize.
 - **Icons** are always `ReactNode` props; zero icon libraries. Item icons sit
   in a fixed 24×24 box.
 - **Images/links**: no Image/Link components. Media is injectable with

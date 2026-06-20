@@ -249,7 +249,7 @@ function DatePickerDocked({
       {open ? (
         <div
           aria-label={l.field}
-          className="animate-menu-in absolute top-full left-0 z-40 mt-1 w-90 max-w-[calc(100vw-2rem)] overflow-hidden rounded-large bg-surface-container-high py-2 shadow-mm-3 [--menu-clip-bleed:-24px]"
+          className="animate-menu-in absolute top-full left-0 z-[var(--md-sys-z-dropdown)] mt-1 w-90 max-w-[calc(100vw-2rem)] overflow-hidden rounded-large bg-surface-container-high py-2 shadow-mm-3 [--menu-clip-bleed:-24px]"
           id={popupId}
           role="dialog">
           <Calendar

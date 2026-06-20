@@ -87,7 +87,7 @@ function SideSheet({
   return (
     <div
       className={cn(
-        "fixed inset-0 z-40 flex justify-end bg-scrim/32",
+        "fixed inset-0 z-[var(--md-sys-z-modal)] flex justify-end bg-scrim/32",
         exiting ? "animate-scrim-sheet-out" : "animate-scrim-sheet-in",
       )}
       onClick={onClose}>

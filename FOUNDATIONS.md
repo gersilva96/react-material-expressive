@@ -70,6 +70,31 @@ utilities). Used only by FAB, dialog, menus, sheets, snackbar and the
 elevated card/button/chip. Interactive elevation transitions at 280ms
 emphasized on buttons/FABs; chips snap (no elevation transition), matching mw.
 
+## Stacking & z-index
+
+Overlays layer through one documented scale of `--md-sys-z-*` tokens (defined
+in `styles.css` `:root`; theme-independent, so they are **not** duplicated in
+the dark scheme), consumed as full Tailwind literals like
+`z-[var(--md-sys-z-menu)]`. Ascending paint order:
+
+| Token                 | Value | Used by                                                              |
+| --------------------- | ----- | -------------------------------------------------------------------- |
+| `--md-sys-z-base`     | 0     | default content plane                                                |
+| `--md-sys-z-raised`   | 10    | in-flow raised bits (FAB-in-toolbar, indicators)                     |
+| `--md-sys-z-sticky`   | 20    | sticky/stacked in-flow chrome (avatar overlaps)                      |
+| `--md-sys-z-dropdown` | 30    | anchored inline popovers (Select, Search, docked pickers)            |
+| `--md-sys-z-menu`     | 50    | portaled menus & popovers (Dropdown, OverflowMenu, SplitButton, Menu.Sub, Combobox) |
+| `--md-sys-z-tooltip`  | 55    | tooltips                                                             |
+| `--md-sys-z-modal`    | 60    | dialogs, sheets, modal rail + their scrims                          |
+| `--md-sys-z-snackbar` | 70    | toasts                                                               |
+
+Menus sit **below** modals: a page-level menu yields to a dialog/sheet scrim,
+while a menu opened inside a dialog still paints above it (both portal to
+`document.body`; the menu mounts later). Override any token to slot custom
+chrome between layers. A separate, clearly-local negative set
+(`--md-sys-z-state-press`/`-hover`, `--md-sys-z-nav-indicator`) lives inside
+isolated state-layer/nav hosts and never interacts with this scale.
+
 ## Motion
 
 - Emphasized `cubic-bezier(0.2, 0, 0, 1)`; the full standard/emphasized

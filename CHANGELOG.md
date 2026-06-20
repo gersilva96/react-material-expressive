@@ -10,6 +10,13 @@ what to adjust when upgrading.
 
 ## [Unreleased]
 
+### Added
+
+- **Documented `--md-sys-z-*` stacking tokens** — every overlay (menus,
+  tooltips, dialogs/sheets, snackbar) now layers through one ascending,
+  consumer-overridable z-index scale instead of scattered hard-coded values.
+  See FOUNDATIONS.md → Stacking & z-index.
+
 ## [1.0.0] - 2026-06-17
 
 Initial public release — the first complete implementation of **Material 3

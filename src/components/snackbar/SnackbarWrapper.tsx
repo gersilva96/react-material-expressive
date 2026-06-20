@@ -22,7 +22,7 @@ function SnackbarWrapper({children, className}: SnackbarWrapperProps) {
   if (!mounted) return null;
 
   return createPortal(
-    <div className="pointer-events-none fixed inset-x-4 top-auto bottom-0 z-60 flex justify-center">
+    <div className="pointer-events-none fixed inset-x-4 top-auto bottom-0 z-[var(--md-sys-z-snackbar)] flex justify-center">
       <div
         className={cn(
           "pointer-events-auto absolute bottom-4 flex w-full max-w-[600px] flex-col items-center justify-center gap-3",
