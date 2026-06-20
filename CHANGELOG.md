@@ -29,6 +29,10 @@ what to adjust when upgrading.
   uncontrolled), refocuses the input, fires `onClear`, hides the inconsistent
   native search clear, and yields to an explicit `rightElement`. Adds
   `labels.clear`.
+- **Polymorphic `TextElement`** — new `as` / `titleAs` / `labelAs` / `bodyAs`
+  props set each rendered element (defaults preserved: div/p/h2/p) so the
+  heading level follows content hierarchy (M3 a11y). With a single slot the
+  text element now renders directly, without the wrapper `<div>`.
 
 ### Fixed
 
