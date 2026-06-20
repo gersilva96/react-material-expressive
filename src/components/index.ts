@@ -58,6 +58,14 @@ export type {CardFooterProps} from "./cards/CardFooter";
 export type {CardHeaderProps} from "./cards/CardHeader";
 export {Chips} from "./chips/Chips";
 export type {ChipsLabels, ChipsProps, ChipsVariant} from "./chips/Chips";
+export {ComboboxFilled} from "./combobox/ComboboxFilled";
+export type {
+  ComboboxFilledProps,
+  ComboboxLabels,
+  ComboboxOption,
+} from "./combobox/ComboboxFilled";
+export {ComboboxOutlined} from "./combobox/ComboboxOutlined";
+export type {ComboboxOutlinedProps} from "./combobox/ComboboxOutlined";
 export {Table} from "./data-table/Table";
 export type {TableProps} from "./data-table/Table";
 export type {TableBodyProps} from "./data-table/TableBody";

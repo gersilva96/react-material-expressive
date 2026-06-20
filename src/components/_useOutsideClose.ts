@@ -14,10 +14,14 @@ export function useOutsideClose<T extends HTMLElement>(
       const target = event.target;
       if (!element || !(target instanceof Node)) return;
       if (element.contains(target)) return;
-      // Submenus render in a portal (outside this ref) to escape the
-      // surface clip — treat any open menu as "inside" so interacting
-      // with a submenu doesn't dismiss its chain.
-      if (target instanceof Element && target.closest('[role="menu"]')) return;
+      // Menus and combobox listboxes render in a portal (outside this ref)
+      // to escape the surface clip — treat any open menu/listbox as "inside"
+      // so interacting with a submenu or an option doesn't dismiss it.
+      if (
+        target instanceof Element &&
+        target.closest('[role="menu"],[role="listbox"]')
+      )
+        return;
       onClose();
     };
     document.addEventListener("pointerdown", handler);
