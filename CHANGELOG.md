@@ -21,6 +21,9 @@ what to adjust when upgrading.
   tooltips, dialogs/sheets, snackbar) now layers through one ascending,
   consumer-overridable z-index scale instead of scattered hard-coded values.
   See FOUNDATIONS.md → Stacking & z-index.
+- **`DatePickerDocked` error state** — accepts `error` / `errorText` /
+  `supportingText`, forwarded to its underlying outlined field (MD3 error role
+  with `aria-invalid` / `role="alert"` / `aria-describedby`).
 
 ### Fixed
 

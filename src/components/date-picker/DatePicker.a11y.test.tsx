@@ -36,3 +36,22 @@ describe("DatePicker a11y", () => {
     ).toHaveNoViolations();
   });
 });
+
+describe("DatePicker error state", () => {
+  it("marks the docked field invalid and exposes the error message", () => {
+    render(<DatePicker.Docked error errorText="Required" />);
+    const field = screen.getByLabelText("Date");
+    expect(field).toHaveAttribute("aria-invalid", "true");
+    const alert = screen.getByRole("alert");
+    expect(alert).toHaveTextContent("Required");
+    expect(field.getAttribute("aria-describedby")!.split(" ")).toContain(
+      alert.id,
+    );
+  });
+
+  it("shows docked supporting text when not in error", () => {
+    render(<DatePicker.Docked supportingText="MM/DD/YYYY" />);
+    expect(screen.getByText("MM/DD/YYYY")).toBeInTheDocument();
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  });
+});

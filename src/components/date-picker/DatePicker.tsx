@@ -196,11 +196,14 @@ const DOCKED_LABELS: Required<DatePickerDockedLabels> = {
 
 export interface DatePickerDockedProps {
   className?: string;
+  error?: boolean;
+  errorText?: ReactNode;
   labels?: DatePickerDockedLabels;
   locale?: string;
   max?: Date | null;
   min?: Date | null;
   onChange?: (date: Date | null) => void;
+  supportingText?: ReactNode;
   value?: Date | null;
   weekStartsOn?: number;
 }
@@ -211,11 +214,14 @@ export interface DatePickerDockedProps {
  */
 function DatePickerDocked({
   className,
+  error,
+  errorText,
   labels,
   locale,
   max,
   min,
   onChange,
+  supportingText,
   value = null,
   weekStartsOn,
 }: DatePickerDockedProps) {
@@ -228,6 +234,8 @@ function DatePickerDocked({
   return (
     <div className={cn("relative w-full", className)} ref={ref}>
       <InputOutlined
+        error={error}
+        errorText={errorText}
         inputClassName="cursor-pointer"
         label={l.field}
         onFocus={() => setOpen(true)}
@@ -244,6 +252,7 @@ function DatePickerDocked({
             {calendarIcon}
           </button>
         }
+        supportingText={supportingText}
         value={formatShort(value, locale)}
       />
       {open ? (

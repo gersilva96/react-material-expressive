@@ -51,11 +51,14 @@ interface DatePickerLabels {
 
 interface DatePickerDockedProps {
   className?: string;
+  error?: boolean; // error state on the field
+  errorText?: ReactNode; // error message below the field
   labels?: DatePickerDockedLabels; // { field, openCalendar, previousMonth, nextMonth, selectYear }
   locale?: string;
   max?: Date | null;
   min?: Date | null;
   onChange?: (date: Date | null) => void;
+  supportingText?: ReactNode; // helper text below the field
   value?: Date | null;
   weekStartsOn?: number;
 }
@@ -89,8 +92,13 @@ const [date, setDate] = useState<Date | null>(null);
     value={date}
 />;
 
-// Docked
-<DatePicker.Docked value={date} onChange={setDate} />;
+// Docked, with validation
+<DatePicker.Docked
+    value={date}
+    onChange={setDate}
+    error={submitted && !date}
+    errorText="Pick a date"
+/>;
 ```
 
 ## Gotchas
@@ -103,6 +111,10 @@ const [date, setDate] = useState<Date | null>(null);
   is in `labels`, e.g. `labels={{cancel: "Cancelar", confirm: "Aceptar"}}`;
   unset keys keep the English defaults.
 - `min`/`max` disable out-of-range days.
+- `error` / `errorText` / `supportingText` recolor and annotate the **docked**
+  field with the MD3 error role (`aria-invalid`, `role="alert"`,
+  `aria-describedby`). The modal pickers render no form field of their own, so
+  they have no error state.
 
 ## Accepted gaps (criterion)
 
