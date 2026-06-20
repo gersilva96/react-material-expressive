@@ -24,6 +24,11 @@ what to adjust when upgrading.
 - **`DatePickerDocked` error state** — accepts `error` / `errorText` /
   `supportingText`, forwarded to its underlying outlined field (MD3 error role
   with `aria-invalid` / `role="alert"` / `aria-describedby`).
+- **`SearchInput` clear button** — opt-in `clearable` renders a trailing clear
+  (×) button while the input has a value; it clears (controlled or
+  uncontrolled), refocuses the input, fires `onClear`, hides the inconsistent
+  native search clear, and yields to an explicit `rightElement`. Adds
+  `labels.clear`.
 
 ### Fixed
 

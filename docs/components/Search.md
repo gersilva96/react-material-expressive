@@ -34,13 +34,16 @@ interface SearchInputProps extends Omit<
   "placeholder" | "size"
 > {
   className?: string;
+  clearable?: boolean; // trailing clear (×) button when there's a value
   inputClassName?: string;
   labels?: SearchInputLabels; // accessible names
   leftElement?: ReactNode; // 56px slot (search icon / back)
-  rightElement?: ReactNode; // 56px slot (avatar / mic)
+  onClear?: () => void; // called after the clear button empties the input
+  rightElement?: ReactNode; // 56px slot (avatar / mic) — wins over clear
 }
 
 interface SearchInputLabels {
+  clear?: string; // clear-button aria-label (default "Clear")
   placeholder?: string; // input placeholder (default "Search")
 }
 
@@ -74,6 +77,7 @@ interface SearchItemProps {
     </>
   }>
   <SearchInput
+    clearable
     labels={{placeholder: "Search"}}
     leftElement={<MaterialSymbol name="search" />}
     onChange={onQuery}
@@ -86,6 +90,10 @@ interface SearchItemProps {
 - `SearchInput` is transparent — the `Search` wrapper owns the container
   color/shape. Standalone bars: wrap in `Search` without `result`.
 - Search bars don't float labels (M3); the placeholder stays visible.
+- `clearable` renders a trailing clear (×) button while the input has a value
+  (controlled or uncontrolled; clearing refocuses the input and fires
+  `onClear`). It hides the inconsistent native `type=search` clear, and a
+  `rightElement` takes precedence over it.
 - The suggestions card opens with the menu choreography (500ms emphasized
   clip reveal with staggered items, 150ms accelerate exit). In the default
   **contained** style the bar keeps its 28px pill shape and the card floats
