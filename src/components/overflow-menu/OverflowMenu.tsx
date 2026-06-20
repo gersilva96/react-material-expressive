@@ -8,9 +8,14 @@ import {
   useRef,
   useState,
 } from "react";
+import {createPortal} from "react-dom";
 import {cn} from "../../utils/helpers";
 import {useDismissable} from "../_useDismissable";
 import {useOutsideClose} from "../_useOutsideClose";
+import {
+  type PopoverPlacement,
+  usePopoverPosition,
+} from "../_usePopoverPosition";
 import {Menu} from "../menu/Menu";
 import {MenuItem} from "../menu/MenuItem";
 
@@ -53,11 +58,29 @@ function OverflowMenu({
   const [open, setOpen] = useState(false);
   const wrapper = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLDivElement>(null);
+  const floating = useRef<HTMLDivElement>(null);
   const wasOpen = useRef(false);
   const menuId = useId();
-  const noPosition = !topLeft && !topRight && !bottomLeft && !bottomRight;
-  const opensUp = Boolean(topLeft || topRight);
+  // Map the corner props to a preferred placement (default bottom-end).
+  const placement: PopoverPlacement = topRight
+    ? "top-end"
+    : topLeft
+      ? "top-start"
+      : bottomLeft
+        ? "bottom-start"
+        : bottomRight
+          ? "bottom-end"
+          : "bottom-end";
   const {exiting, mounted} = useDismissable(open, 150);
+  // Portaled + fixed so the menu escapes any `overflow` ancestor; anchored to
+  // the wrapper box (the inner trigger node is `display: contents`).
+  const pos = usePopoverPosition(wrapper, floating, mounted, {
+    gap: 8,
+    placement,
+  });
+  // Grow away from the trigger: a top placement opens up unless it flipped
+  // down (and vice-versa for a bottom placement).
+  const up = placement.startsWith("top") !== pos.flippedVertically;
 
   useOutsideClose(wrapper, () => setOpen(false), open);
 
@@ -95,26 +118,25 @@ function OverflowMenu({
         ref={trigger}>
         {triggerNode}
       </div>
-      {mounted ? (
-        <div
-          className={cn(
-            "absolute z-20 flex flex-col",
-            topRight && "right-0 bottom-full",
-            topLeft && "bottom-full left-0",
-            (bottomRight || noPosition) && "top-full right-0",
-            bottomLeft && "top-full left-0",
-          )}>
-          <Menu
-            className={cn(opensUp ? "mb-2" : "mt-2", menuClassName)}
-            exiting={exiting}
-            id={menuId}
-            onClose={() => setOpen(false)}
-            up={opensUp}
-            vibrant={vibrant}>
-            {menu}
-          </Menu>
-        </div>
-      ) : null}
+      {mounted && typeof document !== "undefined"
+        ? createPortal(
+            <div
+              className="fixed z-[var(--md-sys-z-menu)]"
+              ref={floating}
+              style={{left: pos.left, top: pos.top}}>
+              <Menu
+                className={menuClassName}
+                exiting={exiting}
+                id={menuId}
+                onClose={() => setOpen(false)}
+                up={up}
+                vibrant={vibrant}>
+                {menu}
+              </Menu>
+            </div>,
+            document.body,
+          )
+        : null}
     </div>
   );
 }

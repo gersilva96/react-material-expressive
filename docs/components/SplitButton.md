@@ -40,7 +40,9 @@ interface SplitButtonLabels {
 The menu is the shared M3E vertical [`Menu`](Menu.md) (corner-large surface,
 `surface-container-low`, elevation 3) anchored to the trailing button's
 bottom-right; focus returns to that button when it closes. `SplitButton.Item`
-is the shared `Menu.Item` (same as `OverflowMenu.Item`).
+is the shared `Menu.Item` (same as `OverflowMenu.Item`). The menu renders in a
+portal on `document.body` (fixed-positioned), so it escapes `overflow`
+ancestors and auto-flips above the button when there's no room below.
 
 ## Sizes
 

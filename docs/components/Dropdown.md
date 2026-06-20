@@ -62,6 +62,10 @@ interface DropdownItemProps {
 
 ## Gotchas
 
+- The menu renders in a portal on `document.body` with fixed positioning, so
+  it escapes `overflow` ancestors (e.g. a `Table` body) and auto-flips above
+  the trigger when there isn't room below; it tracks the trigger on
+  scroll/resize.
 - The whole wrapper toggles on click, so clicking an item also closes the
   menu (select-like behavior).
 - The menu is content-width, clamped to the M3 spec's 112–280dp range
