@@ -127,6 +127,45 @@ public`).
   to a versioned, dated section with a comparison link; every breaking change
   carries a **Migration** note.
 
+### Cutting a release
+
+Branching is **GitHub Flow**: `main` is always publishable and is the only
+long-lived branch. Each change lands on a short branch off `main`
+(`feature/…`, `fix/…`, `hotfix/…`, `enhancement/…`) via PR with CI green; there
+is **no `develop` and no release/collector branch**. `main` is public — **never force-push it** (the pre-1.0.0
+amend-and-force-push flow is retired). Releases are cut by tagging `main`.
+
+Pick the version by **strict SemVer**: bug fixes only → PATCH (`1.0.1`);
+backward-compatible additions (new component/prop/export) → MINOR (`1.1.0`);
+any breaking change → MAJOR (`2.0.0`). One additive change makes the whole
+release a MINOR.
+
+When `main` is green and every change for the release is merged:
+
+1. **Finalize the CHANGELOG** — move `[Unreleased]` to a `## [X.Y.Z] - YYYY-MM-DD`
+   section and update the comparison links at the bottom.
+2. **Bump the version** without committing yet:
+   `npm version <patch|minor|major> --no-git-tag-version` (updates
+   `package.json` + `package-lock.json`).
+3. **Commit + tag** in one clean release commit (gitmoji format, tag `vX.Y.Z`):
+   `git commit -am "🔖 Release: vX.Y.Z" && git tag vX.Y.Z`.
+4. **Push** commit and tag: `git push --follow-tags`.
+5. **Automated from here** — pushing the `vX.Y.Z` tag triggers
+   `.github/workflows/release.yml`, which runs the gate + build
+   (`prepublishOnly`/`prepack`), publishes to npm over **OIDC trusted
+   publishing** (no token; a provenance attestation is generated automatically),
+   and opens the GitHub Release from the matching CHANGELOG section.
+6. **Watch the run.** A pre-publish failure is safe to re-run; once a version is
+   live on npm it can't be republished — fix forward with a new PATCH.
+7. **If the public API changed**, update the separate Storybook and docs repos
+   that consume the package (see below).
+
+**One-time setup:** the package has a GitHub Actions *trusted publisher*
+registered on npmjs.com (repo `gersilva96/react-material-expressive`, workflow
+`release.yml`, allowed action *npm publish*), so no npm token is stored
+anywhere. The workflow needs `id-token: write` and npm `>= 11.5.1` /
+Node `>= 22.14`. Preview the published file set anytime with `npm run pack:dry`.
+
 ## Storybook & docs site
 
 The interactive component workbench (Storybook) and the marketing/docs site
