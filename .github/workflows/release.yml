@@ -1,0 +1,51 @@
+name: Release
+
+# Cuts a release when a vX.Y.Z tag is pushed to main (see AGENTS.md → Cutting a
+# release). Publishes to npm via OIDC trusted publishing — no NPM_TOKEN is
+# stored. The trusted publisher must be registered once on npmjs.com for this
+# package (repo gersilva96/react-material-expressive, this workflow filename,
+# action "npm publish").
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write # create the GitHub Release
+  id-token: write # OIDC auth to npm (trusted publishing) + provenance
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22" # trusted publishing needs Node >= 22.14.0
+          registry-url: "https://registry.npmjs.org"
+      - name: Update npm (trusted publishing needs >= 11.5.1)
+        run: npm install -g npm@latest
+      - run: npm ci
+      # No token: OIDC via id-token. The gate (lint+typecheck+test) runs through
+      # prepublishOnly, the build through prepack, provenance via publishConfig.
+      - name: Publish to npm (OIDC trusted publishing + provenance)
+        run: npm publish
+      - name: Create GitHub Release from the matching CHANGELOG section
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          awk -v ver="$version" '
+            /^## \[/ { if (p) exit; if (index($0, "[" ver "]")) { p=1; next } }
+            /^\[[^][]+\]:/ { if (p) exit }
+            p { print }
+          ' CHANGELOG.md > release-notes.md
+          gh release create "$GITHUB_REF_NAME" \
+            --title "$GITHUB_REF_NAME" \
+            --notes-file release-notes.md \
+            --verify-tag

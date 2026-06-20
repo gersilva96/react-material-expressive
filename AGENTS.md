@@ -150,13 +150,21 @@ When `main` is green and every change for the release is merged:
 3. **Commit + tag** in one clean release commit (gitmoji format, tag `vX.Y.Z`):
    `git commit -am "🔖 Release: vX.Y.Z" && git tag vX.Y.Z`.
 4. **Push** commit and tag: `git push --follow-tags`.
-5. **Publish**: `npm publish` (`prepack` rebuilds `dist/`, `prepublishOnly`
-   runs lint + typecheck + test; `publishConfig.access` is `public`). Use
-   `npm run pack:dry` first if unsure what ships.
-6. **GitHub release**: `gh release create vX.Y.Z` with the CHANGELOG section as
-   notes.
+5. **Automated from here** — pushing the `vX.Y.Z` tag triggers
+   `.github/workflows/release.yml`, which runs the gate + build
+   (`prepublishOnly`/`prepack`), publishes to npm over **OIDC trusted
+   publishing** (no token; a provenance attestation is generated automatically),
+   and opens the GitHub Release from the matching CHANGELOG section.
+6. **Watch the run.** A pre-publish failure is safe to re-run; once a version is
+   live on npm it can't be republished — fix forward with a new PATCH.
 7. **If the public API changed**, update the separate Storybook and docs repos
    that consume the package (see below).
+
+**One-time setup:** the package has a GitHub Actions *trusted publisher*
+registered on npmjs.com (repo `gersilva96/react-material-expressive`, workflow
+`release.yml`, allowed action *npm publish*), so no npm token is stored
+anywhere. The workflow needs `id-token: write` and npm `>= 11.5.1` /
+Node `>= 22.14`. Preview the published file set anytime with `npm run pack:dry`.
 
 ## Storybook & docs site
 
