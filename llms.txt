@@ -6,86 +6,90 @@
 > React >= 19 (ESM + CJS + types, "use client" embedded). Single root
 > export (react-material-expressive) plus the precompiled ./styles.css
 > and the raw ./theme.css Tailwind partial (only to extend with your own
-> Tailwind v4).
+> Tailwind v4). Links below are relative to this file (the package bundles
+> `docs/` alongside it).
 
 ## Start here
 
-- [README](README.md): install, quickstart,
-  theming, icons, media/link injection, i18n (per-component `labels` prop,
-  English defaults only; `locale` for Intl formatting), subpath map.
-- [CHANGELOG](CHANGELOG.md): per-release history with a migration note on
-  every breaking change (pre-1.0: breaking bumps the minor version).
+- [README](README.md) — install, quickstart, theming, icons, media/link
+  injection, i18n (per-component `labels` prop, English defaults only;
+  `locale` for Intl formatting), exports.
+- [FOUNDATIONS](FOUNDATIONS.md) — authoritative M3 sources and the
+  cross-cutting foundations: tokens, state layers, motion, elevation, the type
+  scale, and the documented `--md-sys-z-*` overlay stacking scale.
+- [CHANGELOG](CHANGELOG.md) — per-release history; each breaking change carries
+  a migration note (SemVer: breaking → major, additive → minor, fix → patch).
 
 ## Component docs (API, props, variants, examples, gotchas)
 
 ### Actions
-- [Button](docs/components/Button.md)
-- [ButtonGroup](docs/components/ButtonGroup.md)
-- [ButtonGroupConnected](docs/components/ButtonGroupConnected.md)
-- [IconButton](docs/components/IconButton.md)
-- [FAB and ExtendedFAB](docs/components/FAB.md)
-- [FABMenu](docs/components/FABMenu.md)
-- [SplitButton](docs/components/SplitButton.md)
+- [Button](docs/components/Button.md) — M3 Expressive button; sizes xs–xl, variants, optional toggle.
+- [ButtonGroup](docs/components/ButtonGroup.md) — invisible container that spaces a row of buttons.
+- [ButtonGroupConnected](docs/components/ButtonGroupConnected.md) — buttons joined by 2dp gaps, with toggle selection.
+- [IconButton](docs/components/IconButton.md) — 40×40 icon button (48×48 touch target), variants + toggle.
+- [FAB and ExtendedFAB](docs/components/FAB.md) — floating action buttons (56/80/96) and the extended FAB.
+- [FABMenu](docs/components/FABMenu.md) — a FAB that morphs into a vertical menu of labeled actions.
+- [SplitButton](docs/components/SplitButton.md) — leading action + trailing menu button; the menu portals to escape `overflow`.
 
 ### Communication
-- [Badge, DotBadge, OnIconBadge](docs/components/Badge.md)
-- [Progress and Circle](docs/components/Progress.md)
-- [LoadingIndicator](docs/components/LoadingIndicator.md)
-- [Snackbar and SnackbarWrapper](docs/components/Snackbar.md)
-- [Tooltip](docs/components/Tooltip.md)
-- [Loading](docs/components/Loading.md)
+- [Badge, DotBadge, OnIconBadge](docs/components/Badge.md) — count, dot and on-icon badges on the error container.
+- [Progress and Circle](docs/components/Progress.md) — linear and circular progress indicators (optional `wavy`).
+- [LoadingIndicator](docs/components/LoadingIndicator.md) — expressive 38dp shape-morphing loading indicator.
+- [Snackbar and SnackbarWrapper](docs/components/Snackbar.md) — snackbar (inverse-surface) + its portaled stacking wrapper.
+- [Tooltip](docs/components/Tooltip.md) — plain/rich tooltips on hover/focus, dismissed on Escape.
+- [Loading](docs/components/Loading.md) — icon-sized indeterminate spinner using `currentColor`.
 
 ### Containment
-- [Card (+Header/Body/Footer)](docs/components/Card.md)
-- [Dialog (+Header/Body/Footer)](docs/components/Dialog.md)
-- [BottomSheet and SideSheet](docs/components/Sheets.md)
-- [Divider](docs/components/Divider.md)
-- [List (+List.Item)](docs/components/List.md)
-- [Table (+Head/Body/Row/Cell/HeaderCell/TextContainer)](docs/components/Table.md)
+- [Card (+Header/Body/Footer)](docs/components/Card.md) — card (shape medium) with composable sub-parts.
+- [Dialog (+Header/Body/Footer)](docs/components/Dialog.md) — focus-trapped modal dialog with sub-parts.
+- [BottomSheet and SideSheet](docs/components/Sheets.md) — modal sheets over a 32% scrim.
+- [Divider](docs/components/Divider.md) — 1px `outline-variant` rule.
+- [List (+List.Item)](docs/components/List.md) — expressive (tiles) or plain list.
+- [Table (+Head/Body/Row/Cell/HeaderCell/TextContainer)](docs/components/Table.md) — data table with horizontal scroll and composable parts.
 
 ### Selection and input
-- [Checkbox](docs/components/Checkbox.md)
-- [Radio](docs/components/Radio.md)
-- [Switch](docs/components/Switch.md)
-- [Chips](docs/components/Chips.md)
-- [Slider and SliderDual](docs/components/Slider.md)
-- [TextField (InputOutlined/InputFilled/TextFieldOutlined/TextFieldFilled)](docs/components/TextField.md)
-- [Select (SelectFilled/SelectOutlined)](docs/components/Select.md)
-- [Combobox (ComboboxFilled/ComboboxOutlined)](docs/components/Combobox.md)
-- [Amount](docs/components/Amount.md)
-- [DatePicker (+Docked) and DateRangePicker](docs/components/DatePicker.md)
-- [TimePicker (dial + input)](docs/components/TimePicker.md)
+- [Checkbox](docs/components/Checkbox.md) — custom-rendered checkbox over a native input.
+- [Radio](docs/components/Radio.md) — custom-rendered radio over a native input.
+- [Switch](docs/components/Switch.md) — M3 switch (52×32) over a native input.
+- [Chips](docs/components/Chips.md) — chip (height 32) with an optional remove affordance.
+- [Slider and SliderDual](docs/components/Slider.md) — single and dual-thumb sliders, arrow-key operable.
+- [TextField (InputOutlined/InputFilled/TextFieldOutlined/TextFieldFilled)](docs/components/TextField.md) — outlined/filled fields and textareas with error + supporting text.
+- [Select (SelectFilled/SelectOutlined)](docs/components/Select.md) — outlined/filled select over a listbox, with typeahead.
+- [Combobox (ComboboxFilled/ComboboxOutlined)](docs/components/Combobox.md) — ARIA combobox with consumer-controlled async options, loading and clearable.
+- [Amount](docs/components/Amount.md) — quantity stepper pill (minus / value / plus).
+- [DatePicker (+Docked) and DateRangePicker](docs/components/DatePicker.md) — modal + docked date pickers and a range picker; the docked field takes error state.
+- [TimePicker (dial + input)](docs/components/TimePicker.md) — modal time picker: clock dial + keyboard input.
 
 ### Navigation
-- [NavigationBar (+Item)](docs/components/NavigationBar.md)
-- [NavigationRail (+Item)](docs/components/NavigationRail.md)
-- [TopAppBar (Small/Center/Medium/Large)](docs/components/TopAppBar.md)
-- [DockedToolbar and FloatingToolbar](docs/components/Toolbar.md)
-- [TabsPrimary and TabsSecondary](docs/components/Tabs.md)
-- [LinkBox and LinkContainer](docs/components/Link.md)
-- [Search (+Input/Item)](docs/components/Search.md)
+- [NavigationBar (+Item)](docs/components/NavigationBar.md) — flexible bottom navigation bar.
+- [NavigationRail (+Item)](docs/components/NavigationRail.md) — navigation rail (collapsed/expanded, optional modal); items scroll only on overflow.
+- [TopAppBar (Small/Center/Medium/Large)](docs/components/TopAppBar.md) — top app bar variants as sub-parts.
+- [DockedToolbar and FloatingToolbar](docs/components/Toolbar.md) — docked and floating expressive toolbars.
+- [TabsPrimary and TabsSecondary](docs/components/Tabs.md) — primary and secondary tabs, arrow-key operable.
+- [LinkBox and LinkContainer](docs/components/Link.md) — router-agnostic native `<a>` link helpers.
+- [Search (+Input/Item)](docs/components/Search.md) — search bar + docked results; `SearchInput` supports `clearable`.
 
 ### Menus
-- [Menu (+Item/+Group/+Sub/+Label/+Divider)](docs/components/Menu.md) — shared M3E vertical-menu primitive
-- [Dropdown (+Item)](docs/components/Dropdown.md)
-- [OverflowMenu (+Item)](docs/components/OverflowMenu.md)
-- [ToggleTheme and ToggleThemeMenu](docs/components/ToggleTheme.md)
+- [Menu (+Item/Group/Sub/Label/Divider)](docs/components/Menu.md) — shared M3E vertical-menu primitive; the host positions it.
+- [Dropdown (+Item)](docs/components/Dropdown.md) — trigger + portaled Menu opening below the trigger.
+- [OverflowMenu (+Item)](docs/components/OverflowMenu.md) — corner-anchored portaled menu.
+- [ToggleTheme and ToggleThemeMenu](docs/components/ToggleTheme.md) — prebuilt light/dark theme controls.
 
 ### Media and showcase
-- [Avatar](docs/components/Avatar.md)
-- [AvatarStack](docs/components/AvatarStack.md)
-- [Img](docs/components/Img.md)
-- [MediaFrame](docs/components/MediaFrame.md)
-- [Gallery (+Row)](docs/components/Gallery.md)
-- [Stories (+User/Business)](docs/components/Stories.md)
-- [Video](docs/components/Video.md)
-- [PerspectiveImage and PerspectiveCard](docs/components/Perspective.md)
-- [Blob](docs/components/Blob.md)
+- [Avatar](docs/components/Avatar.md) — avatar with initials/placeholder fallback and badges.
+- [AvatarStack](docs/components/AvatarStack.md) — overlapping avatar row with a hover raise.
+- [Img](docs/components/Img.md) — native `<img>` in a MediaFrame (object-fit, hide-on-error).
+- [MediaFrame](docs/components/MediaFrame.md) — presentational media frame (size/aspect/radius) with media injection.
+- [Gallery (+Row)](docs/components/Gallery.md) — stacked media gallery composed with `Gallery.Row`.
+- [Stories (+User/Business)](docs/components/Stories.md) — horizontal story strip with User/Business items.
+- [Video](docs/components/Video.md) — native looping ambient/media video.
+- [PerspectiveImage and PerspectiveCard](docs/components/Perspective.md) — 3D cursor-tilt showcases.
+- [Blob](docs/components/Blob.md) — decorative blurred, morphing blob.
 
 ### Text and icons
-- [TextElement](docs/components/TextElement.md)
-- [Icon](docs/components/Icon.md)
-- [MaterialSymbol](docs/components/MaterialSymbol.md)
+- [TextElement](docs/components/TextElement.md) — polymorphic label/title/body text stack (`as`/`titleAs`/`labelAs`/`bodyAs`).
+- [Icon](docs/components/Icon.md) — icon slot helper (fixed square box).
+- [MaterialSymbol](docs/components/MaterialSymbol.md) — zero-dependency Material Symbols glyph.
 
 ### Layout
-- [Layers: Container and Section](docs/components/Layers.md)
+- [Layers: Container and Section](docs/components/Layers.md) — `Container` (dotted showcase panel) and `Section` (responsive band).

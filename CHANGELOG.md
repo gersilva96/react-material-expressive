@@ -34,6 +34,13 @@ what to adjust when upgrading.
   heading level follows content hierarchy (M3 a11y). With a single slot the
   text element now renders directly, without the wrapper `<div>`.
 
+### Changed
+
+- **`llms.txt` review** — every entry now carries a one-line description, the
+  new components/props are reflected, a FOUNDATIONS pointer was added, and the
+  stale pre-1.0 versioning note was corrected. Links stay relative (the package
+  bundles `docs/`).
+
 ### Fixed
 
 - **Top-level menus no longer clip inside `overflow` ancestors** — `Dropdown`,
