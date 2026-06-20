@@ -127,6 +127,37 @@ public`).
   to a versioned, dated section with a comparison link; every breaking change
   carries a **Migration** note.
 
+### Cutting a release
+
+Branching is **GitHub Flow**: `main` is always publishable and is the only
+long-lived branch. Each change lands on a short branch off `main` (`fix/…`,
+`feat/…`) via PR with CI green; there is **no `develop` and no release/collector
+branch**. `main` is public — **never force-push it** (the pre-1.0.0
+amend-and-force-push flow is retired). Releases are cut by tagging `main`.
+
+Pick the version by **strict SemVer**: bug fixes only → PATCH (`1.0.1`);
+backward-compatible additions (new component/prop/export) → MINOR (`1.1.0`);
+any breaking change → MAJOR (`2.0.0`). One additive change makes the whole
+release a MINOR.
+
+When `main` is green and every change for the release is merged:
+
+1. **Finalize the CHANGELOG** — move `[Unreleased]` to a `## [X.Y.Z] - YYYY-MM-DD`
+   section and update the comparison links at the bottom.
+2. **Bump the version** without committing yet:
+   `npm version <patch|minor|major> --no-git-tag-version` (updates
+   `package.json` + `package-lock.json`).
+3. **Commit + tag** in one clean release commit (gitmoji format, tag `vX.Y.Z`):
+   `git commit -am "🔖 Release: vX.Y.Z" && git tag vX.Y.Z`.
+4. **Push** commit and tag: `git push --follow-tags`.
+5. **Publish**: `npm publish` (`prepack` rebuilds `dist/`, `prepublishOnly`
+   runs lint + typecheck + test; `publishConfig.access` is `public`). Use
+   `npm run pack:dry` first if unsure what ships.
+6. **GitHub release**: `gh release create vX.Y.Z` with the CHANGELOG section as
+   notes.
+7. **If the public API changed**, update the separate Storybook and docs repos
+   that consume the package (see below).
+
 ## Storybook & docs site
 
 The interactive component workbench (Storybook) and the marketing/docs site
