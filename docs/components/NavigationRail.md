@@ -103,3 +103,6 @@ const [expanded, setExpanded] = useState(false);
 - Per spec: 3–7 destinations, vertical rails sit opposite the content
   edge with ≥24dp margins on large screens, and the rail stays fixed
   while content scrolls vertically.
+- The destinations area scrolls only when the items genuinely overflow the
+  rail height; the header and bottom slot keep their natural size, so a few
+  destinations never show a scrollbar even when the rail is short.

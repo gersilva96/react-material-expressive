@@ -39,3 +39,17 @@ describe("z-index token scale", () => {
     }
   });
 });
+
+describe("NavigationRail items scroll region", () => {
+  it("makes .railItems a flexible region that scrolls only on overflow", () => {
+    const rule = css.match(/\.railItems\s*\{([\s\S]*?)\}/);
+    expect(rule, "missing .railItems rule").not.toBeNull();
+    const apply = rule![1].match(/@apply[^;]*;/);
+    expect(apply, "missing @apply in .railItems").not.toBeNull();
+    // flex-1 + min-h-0 make it the sole flexible region; overflow-y-auto then
+    // only shows a scrollbar when the destinations genuinely overflow.
+    expect(apply![0]).toContain("flex-1");
+    expect(apply![0]).toContain("min-h-0");
+    expect(apply![0]).toContain("overflow-y-auto");
+  });
+});

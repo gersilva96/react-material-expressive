@@ -29,6 +29,9 @@ what to adjust when upgrading.
   `document.body` with fixed positioning (like `Menu.Sub` already did),
   auto-flipping above the trigger when there's no room below and tracking it
   on scroll/resize. Positioning is unified in a shared internal helper.
+- **NavigationRail no longer shows a needless scrollbar** — the destinations
+  area is the sole flexible region and scrolls only on real overflow; the
+  header and bottom slot keep their natural size.
 
 ## [1.0.0] - 2026-06-17
 
