@@ -72,7 +72,7 @@ function Dialog({
   return (
     <div
       className={cn(
-        "fixed inset-0 z-50 flex items-center justify-center bg-scrim/32 p-4",
+        "fixed inset-0 z-[var(--md-sys-z-modal)] flex items-center justify-center bg-scrim/32 p-4",
         exiting ? "animate-scrim-out" : "animate-scrim-in",
       )}
       onClick={handleScrim}>

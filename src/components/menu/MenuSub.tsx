@@ -145,7 +145,7 @@ function MenuSub({
       {open && typeof document !== "undefined"
         ? createPortal(
             <div
-              className="fixed z-50"
+              className="fixed z-[var(--md-sys-z-menu)]"
               onMouseEnter={clear}
               onMouseLeave={hoverClose}
               ref={floating}

@@ -53,7 +53,7 @@ function BottomSheet({
   return (
     <div
       className={cn(
-        "fixed inset-0 z-40 flex items-end justify-center bg-scrim/32",
+        "fixed inset-0 z-[var(--md-sys-z-modal)] flex items-end justify-center bg-scrim/32",
         exiting ? "animate-scrim-sheet-out" : "animate-scrim-sheet-in",
       )}
       onClick={onClose}>

@@ -179,7 +179,7 @@ function Menu({
           // outline-none: the surface is focusable (tabIndex -1) so a
           // root menu can focus it on open without highlighting any
           // item — it must never show a focus ring of its own.
-          "z-50 flex w-max min-w-[112px] max-w-[280px] flex-col outline-none [--menu-clip-bleed:-24px]",
+          "z-[var(--md-sys-z-menu)] flex w-max min-w-[112px] max-w-[280px] flex-col outline-none [--menu-clip-bleed:-24px]",
           grouped
             ? // Transparent stack: each Menu.Group is its own
               // surface, separated by a 2dp gap. overflow-visible

@@ -171,7 +171,7 @@ function NavigationRail({
       {scrim.mounted ? (
         <div
           className={cn(
-            "fixed inset-0 z-40 bg-scrim/32",
+            "fixed inset-0 z-[var(--md-sys-z-modal)] bg-scrim/32",
             scrim.exiting
               ? "animate-scrim-drawer-out"
               : "animate-scrim-drawer-in",

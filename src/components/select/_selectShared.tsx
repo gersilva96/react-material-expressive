@@ -229,7 +229,7 @@ export function SelectMenu({
   return (
     <ul
       className={cn(
-        "absolute top-full left-0 z-30 mt-1 flex max-h-[280px] w-full min-w-max flex-col overflow-hidden overflow-y-auto rounded-large bg-surface-container-low py-0.5 shadow-mm-3 [--menu-clip-bleed:-24px]",
+        "absolute top-full left-0 z-[var(--md-sys-z-dropdown)] mt-1 flex max-h-[280px] w-full min-w-max flex-col overflow-hidden overflow-y-auto rounded-large bg-surface-container-low py-0.5 shadow-mm-3 [--menu-clip-bleed:-24px]",
         exiting ? "animate-menu-out" : "animate-menu-in",
       )}
       id={`${baseId}-listbox`}

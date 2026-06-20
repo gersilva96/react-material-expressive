@@ -78,7 +78,7 @@ function Tooltip({
       <div
         id={tooltipId}
         className={cn(
-          "tooltip absolute z-40 my-1",
+          "tooltip absolute z-[var(--md-sys-z-tooltip)] my-1",
           rich
             ? "pointer-events-none w-max max-w-[320px] rounded-medium bg-surface-container px-4 pt-3 pb-2 shadow-mm-2 group-hover:pointer-events-auto group-focus-within:pointer-events-auto"
             : "pointer-events-none max-w-[200px] rounded-extra-small bg-inverse-surface px-2 py-1",

@@ -15,6 +15,11 @@
  *   @import "react-material-expressive/theme.css";
  */
 
+/* Stacking / z-index: the overlay scale lives as `--md-sys-z-*` custom
+ * properties in styles.css and is consumed via Tailwind arbitrary values
+ * (e.g. `z-[var(--md-sys-z-menu)]`), so no `@theme` mapping is needed here.
+ * See FOUNDATIONS.md → Stacking & z-index for the documented order. */
+
 /* `dark:` follows the library's theme toggle (.dark / [data-theme="dark"]),
  * not prefers-color-scheme, so consumer utilities match the components.
  * Defined here so both this build and the published partial expose it. */
