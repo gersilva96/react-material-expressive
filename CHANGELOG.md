@@ -44,6 +44,10 @@ what to adjust when upgrading.
 - **NavigationRail no longer shows a needless scrollbar** — the destinations
   area is the sole flexible region and scrolls only on real overflow; the
   header and bottom slot keep their natural size.
+- **README links resolve on npm** — the relative links (component docs,
+  `LICENSE`, `llms.txt`, `CHANGELOG`, `AGENTS.md`, `CONTRIBUTING.md`) are now
+  absolute GitHub URLs, so they work on the npmjs.com package page (where
+  relative links 404) as well as on GitHub.
 
 ## [1.0.0] - 2026-06-17
 
