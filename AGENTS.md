@@ -156,8 +156,13 @@ When `main` is green and every change for the release is merged:
    `npm version <patch|minor|major> --no-git-tag-version` (updates
    `package.json` + `package-lock.json`).
 3. **Commit + tag** in one clean release commit (gitmoji format, tag `vX.Y.Z`):
-   `git commit -am "🔖 Release: vX.Y.Z" && git tag vX.Y.Z`.
-4. **Push** commit and tag: `git push --follow-tags`.
+   `git commit -am "🔖 Release: vX.Y.Z" && git tag -a vX.Y.Z -m "Release vX.Y.Z"`.
+   The tag **must be annotated** (`-a`) — `git push --follow-tags` only pushes
+   annotated tags, so a lightweight `git tag vX.Y.Z` is silently left behind and
+   the release never triggers.
+4. **Push** commit and tag: `git push --follow-tags`, then confirm the tag
+   landed with `git ls-remote --tags origin vX.Y.Z` (if it's missing, push it
+   explicitly: `git push origin vX.Y.Z`).
 5. **Automated from here** — pushing the `vX.Y.Z` tag triggers
    `.github/workflows/release.yml`, which runs the gate + build
    (`prepublishOnly`/`prepack`), publishes to npm over **OIDC trusted
