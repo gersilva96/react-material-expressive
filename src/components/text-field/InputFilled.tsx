@@ -147,7 +147,11 @@ function InputFilled({
           </FloatingLabel>
         ) : null}
         {rightElement ? (
-          <FieldIcon className="top-1/2 right-3 z-10 -translate-y-1/2">
+          <FieldIcon
+            className={cn(
+              "top-1/2 right-3 z-10 -translate-y-1/2",
+              error && "text-error",
+            )}>
             {rightElement}
           </FieldIcon>
         ) : null}

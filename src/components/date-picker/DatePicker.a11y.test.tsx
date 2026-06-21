@@ -54,4 +54,18 @@ describe("DatePicker error state", () => {
     expect(screen.getByText("MM/DD/YYYY")).toBeInTheDocument();
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
   });
+
+  it("colors the trailing calendar icon in error", () => {
+    render(<DatePicker.Docked error errorText="Required" />);
+    const openBtn = screen.getByRole("button", {name: "Open calendar"});
+    expect(openBtn).toHaveClass("text-error");
+    expect(openBtn).not.toHaveClass("text-on-surface-variant");
+  });
+
+  it("keeps the calendar icon neutral when not in error", () => {
+    render(<DatePicker.Docked />);
+    expect(screen.getByRole("button", {name: "Open calendar"})).toHaveClass(
+      "text-on-surface-variant",
+    );
+  });
 });

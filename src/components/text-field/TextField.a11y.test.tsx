@@ -35,6 +35,35 @@ describe.each(fields)("$name", ({Component}) => {
     );
   });
 
+  it("colors the trailing icon on error but leaves the leading neutral", () => {
+    render(
+      <Component
+        error
+        errorText="Bad"
+        label="Email"
+        leftElement={<span data-testid="lead" />}
+        rightElement={<span data-testid="trail" />}
+      />,
+    );
+    // Per M3, error recolors the trailing icon; the leading icon stays neutral.
+    expect(screen.getByTestId("trail").parentElement).toHaveClass("text-error");
+    expect(screen.getByTestId("lead").parentElement).toHaveClass(
+      "text-on-surface-variant",
+    );
+    expect(screen.getByTestId("lead").parentElement).not.toHaveClass(
+      "text-error",
+    );
+  });
+
+  it("keeps the trailing icon neutral when there is no error", () => {
+    render(
+      <Component label="Email" rightElement={<span data-testid="trail" />} />,
+    );
+    expect(screen.getByTestId("trail").parentElement).toHaveClass(
+      "text-on-surface-variant",
+    );
+  });
+
   it("merges a consumer-supplied aria-describedby", () => {
     render(
       <Component

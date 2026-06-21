@@ -10,6 +10,15 @@ what to adjust when upgrading.
 
 ## [Unreleased]
 
+### Fixed
+
+- **Trailing icon color in the error state** — text fields (`InputFilled` /
+  `InputOutlined` / `TextFieldFilled` / `TextFieldOutlined`) and the docked date
+  picker now recolor their **trailing** icon (`rightElement` / the calendar
+  button) to `error` when the field is in error, matching the outline, label and
+  supporting text. The **leading** icon stays `on-surface-variant` per the M3
+  spec. `Select` / `Combobox` carets already did this.
+
 ## [1.1.1] - 2026-06-21
 
 ### Fixed

@@ -144,7 +144,11 @@ function InputOutlined({
           </FloatingLabel>
         ) : null}
         {rightElement ? (
-          <FieldIcon className="top-1/2 right-3 -translate-y-1/2">
+          <FieldIcon
+            className={cn(
+              "top-1/2 right-3 -translate-y-1/2",
+              error && "text-error",
+            )}>
             {rightElement}
           </FieldIcon>
         ) : null}
