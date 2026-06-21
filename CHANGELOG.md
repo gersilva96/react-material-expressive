@@ -10,6 +10,17 @@ what to adjust when upgrading.
 
 ## [Unreleased]
 
+### Fixed
+
+- **`ComboboxFilled` / `ComboboxOutlined` placeholder** — when a `label` is set,
+  the `placeholder` no longer shows underneath the resting label; it now stays
+  hidden until the field floats (focus or value), matching the text field
+  behavior. Without a `label` the placeholder shows at rest as before.
+- **Form field shape** — `ComboboxFilled` / `ComboboxOutlined` and
+  `SelectFilled` / `SelectOutlined` used `small` (8dp) corners while the text
+  fields use `extra-small` (4dp). They now all share the text field's
+  `extra-small` shape, so fields sitting together in a form line up.
+
 ## [1.1.0] - 2026-06-20
 
 ### Added

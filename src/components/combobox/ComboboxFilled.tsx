@@ -20,12 +20,12 @@ export type {ComboboxLabels, ComboboxOption};
 export type ComboboxFilledProps = ComboboxBaseProps;
 
 /**
- * M3 filled combobox: the filled text field anatomy (height 56, shape small on
- * the top corners, surface-container-highest, floating label, active
- * indicator) over an ARIA combobox `<input>` with a portaled listbox. Options
- * are consumer-controlled for async search — type to fire `onInputChange`,
- * then feed the already-filtered `options` back in. Controllable via `value` +
- * `onChange`.
+ * M3 filled combobox: the filled text field anatomy (height 56, shape
+ * extra-small on the top corners, surface-container-highest, floating label,
+ * active indicator) over an ARIA combobox `<input>` with a portaled listbox.
+ * Options are consumer-controlled for async search — type to fire
+ * `onInputChange`, then feed the already-filtered `options` back in.
+ * Controllable via `value` + `onChange`.
  */
 function ComboboxFilled({
   className,
@@ -45,6 +45,7 @@ function ComboboxFilled({
   onChange,
   onInputChange,
   options,
+  placeholder,
   supportingText,
   value: valueProp,
   ...inputProps
@@ -88,7 +89,7 @@ function ComboboxFilled({
   return (
     <div className={cn("w-full", className)}>
       <div className="relative" ref={wrapper}>
-        <div className="group relative flex h-14 w-full overflow-hidden rounded-t-small">
+        <div className="group relative flex h-14 w-full overflow-hidden rounded-t-extra-small">
           {leftElement ? (
             <FieldIcon className="top-1/2 left-3 z-10 -translate-y-1/2">
               {leftElement}
@@ -125,6 +126,10 @@ function ComboboxFilled({
             }}
             onFocus={() => setFocused(true)}
             onKeyDown={handleKeyDown}
+            // Hide the placeholder behind the resting label until the field
+            // floats (focus/value), matching the text field — otherwise the
+            // label and placeholder overlap while at rest.
+            placeholder={floating || !label ? placeholder : undefined}
             ref={input}
             role="combobox"
             type="text"

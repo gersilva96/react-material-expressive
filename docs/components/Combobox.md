@@ -111,6 +111,9 @@ label. Typing fires `onInputChange` and keeps the popover open.
   text; blur/Escape/Tab without a pick reverts it to the selected label.
 - `onChange` fires the option **value** (or `""` on clear) — not on every
   keystroke (that's `onInputChange`).
+- With a `label`, the `placeholder` stays hidden until the field floats (focus
+  or value) so it doesn't overlap the resting label — same as the text field.
+  Without a `label` the placeholder shows at rest.
 - The listbox is portaled to `document.body` (fixed positioning), matches the
   input width and flips up when there's no room below — it escapes `overflow`
   ancestors. An empty/loading popover shows a `role="status"` row instead of an

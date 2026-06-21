@@ -17,6 +17,30 @@ describe("Combobox a11y", () => {
     expect(combobox).toHaveAttribute("aria-expanded", "false");
   });
 
+  it("hides the placeholder behind the resting label until focused", () => {
+    render(
+      <ComboboxOutlined
+        label="Fruit"
+        options={options}
+        placeholder="Pick one"
+      />,
+    );
+    const combobox = screen.getByRole("combobox");
+    // At rest the resting label sits over the input; showing the placeholder
+    // too would overlap it, so it stays hidden — matching the text field.
+    expect(combobox).not.toHaveAttribute("placeholder");
+    fireEvent.focus(combobox);
+    expect(combobox).toHaveAttribute("placeholder", "Pick one");
+  });
+
+  it("shows the placeholder at rest when there is no label", () => {
+    render(<ComboboxOutlined options={options} placeholder="Pick one" />);
+    expect(screen.getByRole("combobox")).toHaveAttribute(
+      "placeholder",
+      "Pick one",
+    );
+  });
+
   it("advertises list autocomplete only when onInputChange is wired", () => {
     render(
       <ComboboxOutlined

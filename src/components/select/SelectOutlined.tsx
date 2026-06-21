@@ -17,7 +17,7 @@ export type SelectOutlinedProps = SelectBaseProps;
 
 /**
  * M3 outlined select: the outlined text field anatomy (height 56, shape
- * small, fieldset/legend label notch) opening an options menu with the
+ * extra-small, fieldset/legend label notch) opening an options menu with the
  * @material/web animation. Controllable via `value` + `onChange`;
  * keyboard navigation and 200ms typeahead included.
  */
@@ -106,7 +106,7 @@ function SelectOutlined({
           <fieldset
             aria-hidden
             className={cn(
-              "pointer-events-none absolute inset-0 m-0 min-w-0 rounded-small px-2 transition-colors",
+              "pointer-events-none absolute inset-0 m-0 min-w-0 rounded-extra-small px-2 transition-colors",
               error
                 ? active
                   ? "border-2 border-error"
