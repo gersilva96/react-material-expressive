@@ -18,9 +18,9 @@ export type {SelectOption};
 export type SelectFilledProps = SelectBaseProps;
 
 /**
- * M3 filled select: the filled text field anatomy (height 56, shape small
- * on the top corners, surface-container-highest, floating label, active
- * indicator) opening an options menu with the @material/web animation.
+ * M3 filled select: the filled text field anatomy (height 56, shape
+ * extra-small on the top corners, surface-container-highest, floating label,
+ * active indicator) opening an options menu with the @material/web animation.
  * Controllable via `value` + `onChange`; keyboard navigation and 200ms
  * typeahead included.
  */
@@ -72,7 +72,7 @@ function SelectFilled({
   return (
     <div className={cn("w-full", className)}>
       <div className="relative" ref={wrapper}>
-        <div className="group relative flex h-14 w-full overflow-hidden rounded-t-small">
+        <div className="group relative flex h-14 w-full overflow-hidden rounded-t-extra-small">
           {leftElement ? (
             <FieldIcon className="top-1/2 left-3 z-10 -translate-y-1/2">
               {leftElement}

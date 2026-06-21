@@ -41,6 +41,7 @@ function ComboboxOutlined({
   onChange,
   onInputChange,
   options,
+  placeholder,
   supportingText,
   value: valueProp,
   ...inputProps
@@ -120,6 +121,10 @@ function ComboboxOutlined({
             }}
             onFocus={() => setFocused(true)}
             onKeyDown={handleKeyDown}
+            // Hide the placeholder behind the resting label until the field
+            // floats (focus/value), matching the text field — otherwise the
+            // label and placeholder overlap while at rest.
+            placeholder={floating || !label ? placeholder : undefined}
             ref={input}
             role="combobox"
             type="text"
@@ -129,7 +134,7 @@ function ComboboxOutlined({
           <fieldset
             aria-hidden
             className={cn(
-              "pointer-events-none absolute inset-0 m-0 min-w-0 rounded-small px-2 transition-colors",
+              "pointer-events-none absolute inset-0 m-0 min-w-0 rounded-extra-small px-2 transition-colors",
               error
                 ? active
                   ? "border-2 border-error"
