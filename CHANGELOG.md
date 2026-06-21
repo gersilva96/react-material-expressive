@@ -10,6 +10,8 @@ what to adjust when upgrading.
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-06-21
+
 ### Fixed
 
 - **Trailing icon color in the error state** — text fields (`InputFilled` /
@@ -109,7 +111,8 @@ baseline).
 - React 19+, **ESM + CJS** builds and **TypeScript** types, plus
   machine-readable per-component docs and an LLM index.
 
-[Unreleased]: https://github.com/gersilva96/react-material-expressive/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/gersilva96/react-material-expressive/compare/v1.1.2...HEAD
+[1.1.2]: https://github.com/gersilva96/react-material-expressive/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/gersilva96/react-material-expressive/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/gersilva96/react-material-expressive/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/gersilva96/react-material-expressive/releases/tag/v1.0.0
