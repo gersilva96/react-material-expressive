@@ -139,7 +139,9 @@ function TextFieldOutlined({
           </FloatingLabel>
         ) : null}
         {rightElement ? (
-          <FieldIcon className="top-4 right-3">{rightElement}</FieldIcon>
+          <FieldIcon className={cn("top-4 right-3", error && "text-error")}>
+            {rightElement}
+          </FieldIcon>
         ) : null}
       </div>
       <SupportingText

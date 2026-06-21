@@ -45,6 +45,10 @@ work — the float state tracks either.
   active indicator line (1px on-surface-variant → on-surface on hover →
   2px primary on focus, error on error).
 - `placeholder` only shows while the label is floated (or when no label).
+- In the **error** state the **trailing** icon (`rightElement`) recolors to
+  `error` along with the outline/indicator, label and supporting text; the
+  **leading** icon (`leftElement`) stays `on-surface-variant` per the M3 spec.
+  A trailing icon that draws with `currentColor` picks this up automatically.
 - The float animation is a transform-only tween between two label copies
   (the @material/web technique) — font-size never interpolates, so the
   text doesn't re-rasterize mid-motion.

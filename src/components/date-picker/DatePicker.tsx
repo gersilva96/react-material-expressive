@@ -246,7 +246,10 @@ function DatePickerDocked({
             aria-expanded={open}
             aria-haspopup="dialog"
             aria-label={l.openCalendar}
-            className="state-layer flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-on-surface-variant"
+            className={cn(
+              "state-layer flex h-10 w-10 cursor-pointer items-center justify-center rounded-full",
+              error ? "text-error" : "text-on-surface-variant",
+            )}
             onClick={() => setOpen((o) => !o)}
             type="button">
             {calendarIcon}

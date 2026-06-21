@@ -113,8 +113,8 @@ const [date, setDate] = useState<Date | null>(null);
 - `min`/`max` disable out-of-range days.
 - `error` / `errorText` / `supportingText` recolor and annotate the **docked**
   field with the MD3 error role (`aria-invalid`, `role="alert"`,
-  `aria-describedby`). The modal pickers render no form field of their own, so
-  they have no error state.
+  `aria-describedby`); the trailing calendar icon also turns `error`. The modal
+  pickers render no form field of their own, so they have no error state.
 
 ## Accepted gaps (criterion)
 

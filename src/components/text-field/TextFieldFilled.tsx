@@ -140,7 +140,10 @@ function TextFieldFilled({
           </FloatingLabel>
         ) : null}
         {rightElement ? (
-          <FieldIcon className="top-4 right-3 z-10">{rightElement}</FieldIcon>
+          <FieldIcon
+            className={cn("top-4 right-3 z-10", error && "text-error")}>
+            {rightElement}
+          </FieldIcon>
         ) : null}
       </div>
       <SupportingText
